@@ -5,13 +5,15 @@ import { getCustomInputStyles } from '../../utils/muiCustomTheme'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 
+const initAlert = { email: ' ', password: ' ' }
+
 export default function Login() {
   const [inputs, setInputs] = useState({})
-  const [alert, setAlert] = useState({})
+  const [alert, setAlert] = useState(initAlert)
 
   function handleInput(e) {
     const { name, value } = e.target
-    setAlert({ ...alert, [name]: '' })
+    setAlert({ ...alert, [name]: ' ' })
     if (!value) {
       setAlert({ ...alert, [name]: 'This field cannot be empty' })
     }
@@ -31,7 +33,7 @@ export default function Login() {
         <div className='container'>
           <div className='titles'>
             <h2>Welcome to Wevot!</h2>
-            <h3>Please log in</h3>
+            <p>Please log in</p>
           </div>
 
           <Box
@@ -48,7 +50,7 @@ export default function Login() {
               label='EMAIL / USERNAME'
               type='email'
               name='email'
-              color={alert.email && 'error'}
+              color={alert.email !== ' ' && 'error'}
               helperText={alert.email}
               sx={getCustomInputStyles(alert.email)}
               onChange={handleInput}
@@ -61,7 +63,7 @@ export default function Login() {
                 label='PASSWORD'
                 type='password'
                 name='password'
-                color={alert.password && 'error'}
+                color={alert.password !== ' ' && 'error'}
                 helperText={alert.password}
                 sx={getCustomInputStyles(alert.password)}
                 onChange={handleInput}

@@ -31,7 +31,17 @@ export default function Navbar({ page }) {
           {page === 'login' && (
             <>
               <span className='grey-text default-cursor'>Not a member?</span>
-              <Link className='dark-text bold-text signup-text'>Sign Up For Free</Link>
+              <Link to='/signup' className='dark-text bold-text signup-text'>
+                Sign Up For Free
+              </Link>
+            </>
+          )}
+          {page === 'signup' && (
+            <>
+              <span className='grey-text default-cursor'>Already have an account?</span>
+              <Link to='/login' className='dark-text bold-text signup-text'>
+                Log In
+              </Link>
             </>
           )}
         </div>

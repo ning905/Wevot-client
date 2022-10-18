@@ -17,7 +17,7 @@ export function getCustomInputStyles(error) {
     },
   }
 
-  if (error) {
+  if (error !== ' ') {
     customInputStyles['& .MuiFormLabel-root'].color = '#E15838'
     customInputStyles['& .MuiFormLabel-root.Mui-focused'].color = '#E15838'
   }

@@ -1,0 +1,23 @@
+.signup {
+  .submitted {
+    h2 {
+      margin-bottom: 2rem;
+    }
+
+    p {
+      font-size: 18px;
+
+      &.resend {
+        margin-top: 1rem;
+      }
+    }
+
+    .clickable {
+      text-decoration-line: underline;
+      font-weight: 700;
+      font-size: 16px;
+      color: #211c70;
+      cursor: pointer;
+    }
+  }
+}
