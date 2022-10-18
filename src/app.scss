@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Outfit', sans-serif;
+  z-index: 1;
+}
+
+.App {
+  background: linear-gradient(327.46deg, #e3e0ff 74.38%, #ffffff 116.67%);
+
+  .link {
+    text-decoration: none;
+  }
+}
