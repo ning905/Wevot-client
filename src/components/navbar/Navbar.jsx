@@ -1,27 +1,39 @@
 import { Link } from 'react-router-dom'
 import './navbar.scss'
 
-export default function Navbar() {
+export default function Navbar({ page }) {
   return (
     <div className='navbar'>
       <div className='wrap'>
         <div className='left'>
-          <h1 className='logo'>WEVOT</h1>
+          <Link className='link' to='/'>
+            <h1 className='logo'>WEVOT</h1>
+          </Link>
         </div>
 
         <div className='right'>
-          <Link className='link'>
-            <span className='dark-text'>JOIN</span>
-          </Link>
-          <Link className='link'>
-            <span className='dark-text'>HOST</span>
-          </Link>
-          <Link to='/login' className='link'>
-            <button className='dark-text login-btn'>Log In</button>
-          </Link>
-          <Link to='/signup' className='link'>
-            <button className='signup-btn'>Sign Up</button>
-          </Link>
+          {page === 'home' && (
+            <>
+              <Link className='link'>
+                <span className='dark-text'>JOIN</span>
+              </Link>
+              <Link className='link'>
+                <span className='dark-text'>HOST</span>
+              </Link>
+              <Link to='/login' className='link'>
+                <button className='dark-text bold-text login-btn'>Log In</button>
+              </Link>
+              <Link to='/signup' className='link'>
+                <button className='bold-text signup-btn'>Sign Up</button>
+              </Link>
+            </>
+          )}
+          {page === 'login' && (
+            <>
+              <span className='grey-text default-cursor'>Not a member?</span>
+              <Link className='dark-text bold-text signup-text'>Sign Up For Free</Link>
+            </>
+          )}
         </div>
       </div>
     </div>
