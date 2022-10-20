@@ -34,9 +34,9 @@
     justify-content: center;
 
     .container {
-      width: 100%;
+      width: 75%;
       max-width: 1440px;
-      padding: 100px 190px;
+      padding: 100px 0;
 
       display: grid;
       place-items: center;
@@ -49,7 +49,7 @@
         gap: 15px;
 
         .text-wrap {
-          flex: 1;
+          flex: 5;
 
           display: flex;
           flex-direction: column;
@@ -91,7 +91,7 @@
         }
 
         .img-wrap {
-          flex: 1.5;
+          flex: 7;
           height: 590px;
           background-color: #000;
         }
