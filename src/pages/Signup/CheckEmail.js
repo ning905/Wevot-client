@@ -16,7 +16,6 @@ export default function CheckEmail() {
               Can’t find the email? <span className='clickable'>Click here to resend</span>
             </p>
           </div>
-          <button type='submit'>DONE</button>
         </div>
       </main>
     </div>

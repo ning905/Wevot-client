@@ -1,4 +1,10 @@
 .signup {
+  .titles {
+    p#server-error {
+      color: #e15838;
+    }
+  }
+
   .submitted {
     h2 {
       margin-bottom: 2rem;

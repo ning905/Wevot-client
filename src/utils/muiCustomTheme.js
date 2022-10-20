@@ -1,4 +1,4 @@
-export function getCustomInputStyles(error) {
+export function getCustomInputStyles(alert) {
   const customInputStyles = {
     '& .MuiFormLabel-root': {
       fontFamily: 'Outfit',
@@ -13,13 +13,13 @@ export function getCustomInputStyles(error) {
     '& .MuiFormHelperText-root': {
       fontFamily: 'Outfit',
       fontSize: '13px',
-      color: '#E15838',
     },
   }
 
-  if (error !== ' ') {
+  if (alert.status === 'error') {
     customInputStyles['& .MuiFormLabel-root'].color = '#E15838'
     customInputStyles['& .MuiFormLabel-root.Mui-focused'].color = '#E15838'
+    customInputStyles['& .MuiFormHelperText-root'].color = '#E15838'
   }
 
   return customInputStyles

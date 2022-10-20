@@ -4,25 +4,21 @@ import { TextField, Box } from '@mui/material'
 import { getCustomInputStyles } from '../../utils/muiCustomTheme'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-
-const initAlert = {
-  username: ' ',
-  email: ' ',
-  password: ' ',
-  confirmPassword: ' ',
-}
+import { areAllFieldsValid, error, initAlert, userValidRegex } from '../../utils/validRegex'
+import client from '../../utils/client'
 
 const initInputs = {
   username: '',
   email: '',
   password: '',
-  confirmPassword: '',
+  confirmedPassword: '',
 }
 
 export default function Signup() {
   const [inputs, setInputs] = useState(initInputs)
   const [alert, setAlert] = useState(initAlert)
   const navigate = useNavigate()
+  const [serverError, setServerError] = useState('')
 
   useEffect(() => {
     setInputs(initInputs)
@@ -31,46 +27,53 @@ export default function Signup() {
 
   function handleInput(e) {
     const { name, value } = e.target
-    setAlert({ ...alert, [name]: ' ' })
+    setAlert({ ...alert, [name]: initAlert[name] })
+
+    if (name === 'password') {
+      if (value.match(userValidRegex[name])) {
+        setAlert({
+          ...alert,
+          [name]: error.passRequire,
+        })
+      }
+    }
+
+    if (name === 'confirmedPassword' && value !== inputs.password) {
+      setAlert({ ...alert, [name]: error.diffPass })
+    }
+
     if (!value) {
-      setAlert({ ...alert, [name]: 'This field cannot be empty' })
+      setAlert({ ...alert, [name]: error.emptyField })
     }
 
     setInputs({ ...inputs, [name]: value })
   }
 
-  function areAllFieldsValid() {
-    const inputKeys = Object.keys(initInputs)
-    for (let i = 0; i < inputKeys.length; i++) {
-      const key = inputKeys[i]
-
-      if (!inputs[key]) {
-        setAlert({ ...alert, [key]: 'This field cannot be empty' })
-        return false
-      }
-
-      if (key === 'email') {
-        const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-        if (!inputs[key].match(validRegex)) {
-          setAlert({ ...alert, email: 'Invalid email address' })
-          return false
-        }
-      }
-    }
-
-    const findError = Object.values(alert).find((alert) => alert !== ' ')
-    if (findError) {
-      return false
-    }
-    return true
-  }
-
-  function handleLogin(e) {
+  function handleSignup(e) {
     e.preventDefault()
 
-    if (areAllFieldsValid()) {
-      console.log('navigate')
-      navigate('/signup/check-email')
+    if (areAllFieldsValid(initInputs, inputs, alert, setAlert)) {
+      client
+        .post('/users/signup', inputs)
+        .then((res) => {
+          if (res.data.status === 'success') {
+            navigate('/signup/check-email')
+          }
+        })
+        .catch((res) => {
+          const data = res.response.data
+          if (Object.keys(inputs).includes(data.message.field)) {
+            setAlert({
+              ...alert,
+              [data.message.field]: { status: 'error', content: data.message.content },
+            })
+          } else {
+            setServerError(data.message)
+            setTimeout(() => {
+              setServerError('')
+            }, '3000')
+          }
+        })
     }
   }
 
@@ -83,13 +86,14 @@ export default function Signup() {
           <div className='titles'>
             <h2>Join us!</h2>
             <p>Enter your details below to create an account.</p>
+            {serverError && <p id='server-error'>Failed: {serverError}</p>}
           </div>
 
           <Box
             className='box'
             component='form'
             autoComplete='off'
-            onSubmit={handleLogin}
+            onSubmit={handleSignup}
             noValidate
           >
             <TextField
@@ -100,8 +104,8 @@ export default function Signup() {
               type='text'
               name='username'
               value={inputs.username}
-              color={alert.username !== ' ' && 'error'}
-              helperText={alert.username}
+              color={alert.username.status}
+              helperText={alert.username.content}
               sx={getCustomInputStyles(alert.username)}
               onChange={handleInput}
             />
@@ -114,8 +118,8 @@ export default function Signup() {
               type='email'
               name='email'
               value={inputs.email}
-              color={alert.email !== ' ' && 'error'}
-              helperText={alert.email}
+              color={alert.email.status}
+              helperText={alert.email.content}
               sx={getCustomInputStyles(alert.email)}
               onChange={handleInput}
             />
@@ -128,8 +132,8 @@ export default function Signup() {
               type='password'
               name='password'
               value={inputs.password}
-              color={alert.password !== ' ' && 'error'}
-              helperText={alert.password}
+              color={alert.password.status}
+              helperText={alert.password.content}
               sx={getCustomInputStyles(alert.password)}
               onChange={handleInput}
             />
@@ -140,11 +144,11 @@ export default function Signup() {
               variant='standard'
               label='CONFIRM PASSWORD'
               type='password'
-              name='confirmPassword'
-              value={inputs.confirmPassword}
-              color={alert.confirmPassword !== ' ' && 'error'}
-              helperText={alert.confirmPassword}
-              sx={getCustomInputStyles(alert.confirmPassword)}
+              name='confirmedPassword'
+              value={inputs.confirmedPassword}
+              color={alert.confirmedPassword.status}
+              helperText={alert.confirmedPassword.content}
+              sx={getCustomInputStyles(alert.confirmedPassword)}
               onChange={handleInput}
             />
 
