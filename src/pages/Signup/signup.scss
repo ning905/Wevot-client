@@ -13,8 +13,18 @@
     p {
       font-size: 18px;
 
-      &.resend {
+      &.reminder {
         margin-top: 1rem;
+      }
+
+      &#success-alert {
+        color: #211c70;
+        font-weight: 700;
+      }
+
+      &#fail-alert {
+        color: #e15838;
+        font-weight: 700;
       }
     }
 

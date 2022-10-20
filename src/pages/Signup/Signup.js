@@ -29,6 +29,15 @@ export default function Signup() {
     const { name, value } = e.target
     setAlert({ ...alert, [name]: initAlert[name] })
 
+    if (name === 'username') {
+      if (!value.match(userValidRegex[name])) {
+        setAlert({
+          ...alert,
+          [name]: error.usernameRequire,
+        })
+      }
+    }
+
     if (name === 'password') {
       if (value.match(userValidRegex[name])) {
         setAlert({
@@ -57,7 +66,7 @@ export default function Signup() {
         .post('/users/signup', inputs)
         .then((res) => {
           if (res.data.status === 'success') {
-            navigate('/signup/check-email')
+            navigate(`/signup/check-email/${inputs.username}`)
           }
         })
         .catch((res) => {
