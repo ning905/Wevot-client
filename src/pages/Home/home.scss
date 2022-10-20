@@ -1,4 +1,33 @@
 .home {
+  background: radial-gradient(
+        44.93% 27.95% at 70.49% 48.79%,
+        rgba(227, 119, 159, 0.536) 0%,
+        rgba(241, 127, 168, 0.392) 27.08%,
+        rgba(252, 150, 187, 0) 100%
+      )
+      /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+    radial-gradient(
+        35.28% 46.36% at 106.53% 36.04%,
+        rgba(0, 159, 169, 0.6) 7.29%,
+        rgba(3, 188, 200, 0.348) 58.85%,
+        rgba(47, 217, 227, 0) 100%
+      )
+      /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+    radial-gradient(
+        47.99% 17.32% at 41.15% 61.29%,
+        rgba(217, 47, 88, 0.32) 17.71%,
+        rgba(225, 79, 132, 0) 100%
+      )
+      /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+    radial-gradient(
+        50.21% 38.25% at 0% 55.88%,
+        rgba(255, 162, 149, 0.672) 10.42%,
+        rgba(255, 169, 141, 0.144) 63.02%,
+        rgba(255, 204, 188, 0) 100%
+      )
+      /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+    linear-gradient(327.46deg, #e3e0ff 74.38%, #ffffff 116.67%);
+
   main {
     width: 100vw;
     display: flex;
