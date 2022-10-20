@@ -2,20 +2,30 @@ import './login.scss'
 import Navbar from '../../components/navbar/Navbar'
 import { TextField, Box } from '@mui/material'
 import { getCustomInputStyles } from '../../utils/muiCustomTheme'
-import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useContext, useState } from 'react'
+import { error, filedHasContent } from '../../utils/validRegex'
+import client from '../../utils/client'
+import { UserContext } from '../../context/UserContext'
 
-const initAlert = { email: ' ', password: ' ' }
+const initInputAlert = {
+  identifier: { status: '', content: ' ' },
+  password: { status: '', content: ' ' },
+}
 
 export default function Login() {
-  const [inputs, setInputs] = useState({})
-  const [alert, setAlert] = useState(initAlert)
+  const [inputs, setInputs] = useState({ identifier: '', password: '' })
+  const [alert, setAlert] = useState(initInputAlert)
+  const [accountError, setAccountError] = useState('')
+  const { userAction } = useContext(UserContext)
+  const navigate = useNavigate()
 
   function handleInput(e) {
+    setAccountError('')
     const { name, value } = e.target
-    setAlert({ ...alert, [name]: ' ' })
+    setAlert({ ...alert, [name]: initInputAlert[name] })
     if (!value) {
-      setAlert({ ...alert, [name]: 'This field cannot be empty' })
+      setAlert({ ...alert, [name]: error.emptyField })
     }
 
     setInputs({ ...inputs, [name]: value })
@@ -23,6 +33,28 @@ export default function Login() {
 
   function handleLogin(e) {
     e.preventDefault()
+
+    const bothFieldsHasContent =
+      filedHasContent('identifier', inputs.identifier, alert, setAlert) &&
+      filedHasContent('password', inputs.password, alert, setAlert)
+
+    if (bothFieldsHasContent) {
+      client
+        .post('/users/login', inputs)
+        .then((res) => {
+          const data = res.data.data
+          const token = data.token
+          const tokenKey = process.env.REACT_APP_USER_TOKEN
+          localStorage.setItem(tokenKey, token)
+          userAction({ type: 'LOGIN', payload: data.user })
+
+          navigate(`/${data.user.username}`)
+        })
+        .catch((res) => {
+          const data = res.response.data
+          setAccountError(data.message)
+        })
+    }
   }
 
   return (
@@ -34,6 +66,7 @@ export default function Login() {
           <div className='titles'>
             <h2>Welcome to Wevot!</h2>
             <p>Please log in</p>
+            {accountError && <p id='account-error'>Failed: {accountError}</p>}
           </div>
 
           <Box
@@ -48,11 +81,12 @@ export default function Login() {
               className='input-field'
               variant='standard'
               label='EMAIL / USERNAME'
-              type='email'
-              name='email'
-              color={alert.email !== ' ' && 'error'}
-              helperText={alert.email}
-              sx={getCustomInputStyles(alert.email)}
+              type='text'
+              name='identifier'
+              value={inputs.identifier}
+              color={alert.identifier.status}
+              helperText={alert.identifier.content}
+              sx={getCustomInputStyles(alert.identifier)}
               onChange={handleInput}
             />
             <div className='password-wrap'>
@@ -63,8 +97,9 @@ export default function Login() {
                 label='PASSWORD'
                 type='password'
                 name='password'
-                color={alert.password !== ' ' && 'error'}
-                helperText={alert.password}
+                value={inputs.password}
+                color={alert.password.status}
+                helperText={alert.password.content}
                 sx={getCustomInputStyles(alert.password)}
                 onChange={handleInput}
               />
