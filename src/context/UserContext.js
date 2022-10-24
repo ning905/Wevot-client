@@ -17,7 +17,10 @@ export const UserContextProvider = ({ children }) => {
       const username = jwt_decode(token).username
       client
         .get(`/users/${username}`)
-        .then((res) => dispatch({ type: 'LOGIN', payload: res.data.data }))
+        .then((res) => {
+          console.log('response', res)
+          dispatch({ type: 'LOGIN', payload: res.data.data })
+        })
         .catch((err) => {
           console.log('remove token')
           localStorage.removeItem(tokenKey)
@@ -25,6 +28,9 @@ export const UserContextProvider = ({ children }) => {
         })
     }
   }, [])
+
+  console.log('token', token)
+  console.log('currentUser', state.user)
 
   return (
     (!token || state.user) && (
