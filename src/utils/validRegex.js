@@ -17,7 +17,7 @@ export const error = {
   invalid: (fieldName) => {
     return { status: 'error', content: `Invalid ${fieldName}` }
   },
-  usernameRequire: { status: '', content: '*Username can only contain letters and numbers' },
+  usernameRequire: { status: 'error', content: '*Username can only contain letters and numbers' },
   passRequire: {
     status: '',
     content:
