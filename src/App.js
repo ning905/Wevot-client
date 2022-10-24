@@ -23,7 +23,7 @@ function App() {
               <Route path='verify/:userId/:uniqueString' element={<Verify />} />
             </Route>
 
-            <Route path=':username'>
+            <Route path='dashboard'>
               <Route index element={<Personal />} />
             </Route>
           </Route>
