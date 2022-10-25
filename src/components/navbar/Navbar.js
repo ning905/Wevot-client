@@ -1,7 +1,22 @@
-import { Link } from 'react-router-dom'
+import { useContext, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { UserContext } from '../../context/UserContext'
+import JoinForm from '../joinForm/JoinForm'
 import './navbar.scss'
 
 export default function Navbar({ page }) {
+  const [open, setOpen] = useState(false)
+  const { currentUser } = useContext(UserContext)
+  const navigate = useNavigate()
+
+  function handleHost() {
+    return currentUser ? navigate('/events/create') : navigate('/login')
+  }
+
+  function handleClickOpen() {
+    setOpen(true)
+  }
+
   return (
     <div className='navbar'>
       <div className='wrap'>
@@ -14,12 +29,12 @@ export default function Navbar({ page }) {
         <div className='right'>
           {page === 'home' && (
             <>
-              <Link className='link'>
-                <span className='dark-text'>JOIN</span>
-              </Link>
-              <Link className='link'>
-                <span className='dark-text'>HOST</span>
-              </Link>
+              <span className='dark-text clickable' onClick={handleClickOpen}>
+                JOIN
+              </span>
+              <span className='dark-text clickable' onClick={handleHost}>
+                HOST
+              </span>
               <Link to='/login' className='link'>
                 <button className='dark-text bold-text login-btn'>Log In</button>
               </Link>
@@ -46,6 +61,7 @@ export default function Navbar({ page }) {
           )}
         </div>
       </div>
+      <JoinForm open={open} setOpen={setOpen} />
     </div>
   )
 }

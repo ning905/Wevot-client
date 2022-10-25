@@ -26,7 +26,7 @@ export const error = {
   diffPass: { status: 'error', content: 'Confirmed password must be the same as the password' },
 }
 
-export function filedHasContent(fieldKey, filedValue, alert, setAlert) {
+export function fieldHasContent(fieldKey, filedValue, alert, setAlert) {
   console.log('checking: ', fieldKey)
   if (!filedValue) {
     setAlert({ ...alert, [fieldKey]: error.emptyField })
@@ -40,7 +40,7 @@ export function areAllFieldsValid(initInputs, inputs, alert, setAlert) {
   for (let i = 0; i < inputKeys.length; i++) {
     const key = inputKeys[i]
 
-    if (!inputs[key]) {
+    if (key !== 'name' && !inputs[key]) {
       setAlert({ ...alert, [key]: error.emptyField })
       return false
     }
@@ -50,7 +50,7 @@ export function areAllFieldsValid(initInputs, inputs, alert, setAlert) {
         setAlert({ ...alert, [key]: error.invalid(key) })
         return false
       }
-    } else if (!inputs[key].match(userValidRegex[key])) {
+    } else if ((key === 'username' || key === 'email') && !inputs[key].match(userValidRegex[key])) {
       setAlert({ ...alert, [key]: error.invalid(key) })
       return false
     }

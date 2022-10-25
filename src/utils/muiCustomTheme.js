@@ -1,4 +1,4 @@
-export function getCustomInputStyles(alert) {
+export function getCustomInputStyles(alert = { status: '' }) {
   const customInputStyles = {
     '& .MuiFormLabel-root': {
       fontFamily: 'Outfit',
