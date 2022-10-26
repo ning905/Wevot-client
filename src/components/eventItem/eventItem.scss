@@ -1,0 +1,79 @@
+.event-item {
+  height: 90px;
+
+  .wrap {
+    height: 100%;
+    background: #ffffff;
+    box-shadow: 0px 4px 4px rgba(123, 97, 255, 0.1);
+    border-radius: 10px;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 1.8fr 1fr 1.5fr;
+    align-items: center;
+    padding: 0 1.4rem;
+    cursor: pointer;
+
+    &:hover {
+      border: 2px solid #6b6bee;
+    }
+
+    .title-wrap {
+      display: flex;
+      gap: 1.4rem;
+      align-items: center;
+
+      img {
+        width: 45px;
+        height: 45px;
+        border-radius: 10px;
+      }
+
+      h3 {
+        font-weight: 500;
+        font-size: 20px;
+      }
+    }
+
+    .status-wrap {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+
+      .icon {
+        &.Pending {
+          color: #e15838;
+        }
+
+        &.Closed {
+          color: #cacaca;
+        }
+      }
+
+      p {
+        font-size: 1rem;
+      }
+    }
+
+    .slots-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      color: rgba(0, 0, 0, 0.8);
+      padding-left: 2rem;
+
+      p {
+        font-size: 0.9rem;
+      }
+
+      .participants-wrap {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+      }
+
+      .voted-slots {
+        padding-left: 0.2rem;
+      }
+    }
+  }
+}
