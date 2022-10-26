@@ -81,6 +81,17 @@
             height: 95px;
             border-radius: 50%;
             background-color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            position: relative;
+
+            &:hover {
+              img {
+                opacity: 0.5;
+              }
+              .change-avatar-icon {
+                opacity: 1;
+              }
+            }
 
             img {
               width: 85px;
@@ -88,6 +99,20 @@
               object-fit: cover;
               border-radius: 50%;
               box-sizing: content-box;
+              opacity: 1;
+              transition: opacity 0.2s ease-in-out;
+            }
+
+            .change-avatar-icon {
+              position: absolute;
+              top: 0;
+              right: 0;
+              bottom: 0;
+              left: 0;
+              opacity: 0;
+              transition: opacity 0.2s ease-in-out;
+              display: grid;
+              place-items: center;
             }
           }
         }

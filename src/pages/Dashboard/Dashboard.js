@@ -4,7 +4,13 @@ import AvatarForm from '../../components/avatarForm/AvatarForm'
 import EventItem from '../../components/eventItem/EventItem'
 import Navbar from '../../components/navbar/Navbar'
 import SearchBar from '../../components/searchBar/SearchBar'
-import { LinkOutlined, MailOutline, HomeOutlined, NearMeOutlined } from '@mui/icons-material'
+import {
+  LinkOutlined,
+  MailOutline,
+  HomeOutlined,
+  NearMeOutlined,
+  DriveFileRenameOutline,
+} from '@mui/icons-material'
 import { UserContext } from '../../context/UserContext'
 import client from '../../utils/client'
 import './dashboard.scss'
@@ -67,9 +73,15 @@ export default function Dashboard() {
         <div className='container'>
           <div className='left'>
             <div className='profile-wrap'>
-              <div className='avatar-wrap'>
-                <img src={currentUser.profileImgUrl} alt='avatar' onClick={handleClickOpenDialog} />
+              <div className='avatar-wrap' onClick={handleClickOpenDialog}>
+                <img src={currentUser.profileImgUrl} alt='avatar' />
+                <div className='change-avatar-icon'>
+                  <DriveFileRenameOutline
+                    sx={{ width: '2rem', height: '2rem', color: '#16DCF4' }}
+                  />
+                </div>
               </div>
+
               <h2>{currentUser.username}</h2>
               <p>
                 <MailOutline fontSize='1rem' />
