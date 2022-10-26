@@ -13,10 +13,7 @@ const client = {
   },
 
   post: (path, data, withToken = true) => {
-    console.log('host: ', host)
-    console.log('is posting')
     const url = `${host}${path}`
-    console.log('path: ', url)
     const token = localStorage.getItem(tokenKey)
     let headers = {}
 

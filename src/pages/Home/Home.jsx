@@ -22,7 +22,7 @@ export default function Home() {
 
   return (
     <div className='home'>
-      <Navbar page='home' handleClickOpen={handleClickOpen} />
+      <Navbar page='init' handleClickOpen={handleClickOpen} />
 
       <main>
         <div className='container'>

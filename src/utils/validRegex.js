@@ -1,10 +1,3 @@
-export const initAlert = {
-  username: { status: '', content: ' ' },
-  email: { status: '', content: ' ' },
-  password: { status: '', content: ' ' },
-  confirmedPassword: { status: '', content: ' ' },
-}
-
 export const userValidRegex = {
   username: /^[a-zA-Z0-9]+$/,
   email: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,

@@ -4,7 +4,7 @@ import { TextField, Box } from '@mui/material'
 import { getCustomInputStyles } from '../../utils/muiCustomTheme'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { areAllFieldsValid, error, initAlert, userValidRegex } from '../../utils/validRegex'
+import { areAllFieldsValid, error, userValidRegex } from '../../utils/validRegex'
 import client from '../../utils/client'
 
 const initInputs = {
@@ -12,6 +12,13 @@ const initInputs = {
   email: '',
   password: '',
   confirmedPassword: '',
+}
+
+const initAlert = {
+  username: { status: '', content: ' ' },
+  email: { status: '', content: ' ' },
+  password: { status: '', content: ' ' },
+  confirmedPassword: { status: '', content: ' ' },
 }
 
 export default function Signup() {

@@ -13,10 +13,12 @@ export default function Verify() {
   useEffect(() => {
     let isFetched = false
 
+    console.log('isFetched: ', isFetched)
     client
       .get(`/users/verify/${userId}/${uniqueString}`)
       .then((res) => {
-        if (isFetched) {
+        console.log('fetched successfully')
+        if (!isFetched) {
           const data = res.data.data
           setPage({
             status: res.data.status,
@@ -31,7 +33,9 @@ export default function Verify() {
         }
       })
       .catch((res) => {
-        if (isFetched) {
+        console.log('fetched failed')
+
+        if (!isFetched) {
           const data = res.response.data
           setPage({ status: data.status, title: 'An Error Occurred', message: data.message })
         }

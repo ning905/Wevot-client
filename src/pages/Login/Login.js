@@ -4,18 +4,20 @@ import { TextField, Box } from '@mui/material'
 import { getCustomInputStyles } from '../../utils/muiCustomTheme'
 import { Link, useNavigate } from 'react-router-dom'
 import { useContext, useState } from 'react'
-import { error, filedHasContent } from '../../utils/validRegex'
+import { error, fieldHasContent } from '../../utils/validRegex'
 import client from '../../utils/client'
 import { UserContext } from '../../context/UserContext'
 
-const initInputAlert = {
+const initInputs = { identifier: '', password: '' }
+
+const initAlert = {
   identifier: { status: '', content: ' ' },
   password: { status: '', content: ' ' },
 }
 
 export default function Login() {
-  const [inputs, setInputs] = useState({ identifier: '', password: '' })
-  const [alert, setAlert] = useState(initInputAlert)
+  const [inputs, setInputs] = useState(initInputs)
+  const [alert, setAlert] = useState(initAlert)
   const [accountError, setAccountError] = useState('')
   const { userAction } = useContext(UserContext)
   const navigate = useNavigate()
@@ -23,7 +25,7 @@ export default function Login() {
   function handleInput(e) {
     setAccountError('')
     const { name, value } = e.target
-    setAlert({ ...alert, [name]: initInputAlert[name] })
+    setAlert({ ...alert, [name]: initAlert[name] })
     if (!value) {
       setAlert({ ...alert, [name]: error.emptyField })
     }
@@ -35,8 +37,8 @@ export default function Login() {
     e.preventDefault()
 
     const bothFieldsHasContent =
-      filedHasContent('identifier', inputs.identifier, alert, setAlert) &&
-      filedHasContent('password', inputs.password, alert, setAlert)
+      fieldHasContent('identifier', inputs.identifier, alert, setAlert) &&
+      fieldHasContent('password', inputs.password, alert, setAlert)
 
     if (bothFieldsHasContent) {
       client
