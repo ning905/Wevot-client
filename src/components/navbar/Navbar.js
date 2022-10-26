@@ -6,7 +6,7 @@ import './navbar.scss'
 
 export default function Navbar({ page }) {
   const [open, setOpen] = useState(false)
-  const { currentUser } = useContext(UserContext)
+  const { currentUser, userAction } = useContext(UserContext)
   const navigate = useNavigate()
 
   function handleHost() {
@@ -15,6 +15,15 @@ export default function Navbar({ page }) {
 
   function handleClickOpen() {
     setOpen(true)
+  }
+
+  function handleLogout() {
+    localStorage.removeItem(process.env.REACT_APP_USER_TOKEN)
+    userAction({ type: 'LOGOUT' })
+
+    if (page !== 'init') {
+      navigate('/login')
+    }
   }
 
   return (
@@ -27,7 +36,7 @@ export default function Navbar({ page }) {
         </div>
 
         <div className='right'>
-          {page === 'home' && (
+          {page === 'init' && (
             <>
               <span className='dark-text clickable' onClick={handleClickOpen}>
                 JOIN
@@ -35,12 +44,25 @@ export default function Navbar({ page }) {
               <span className='dark-text clickable' onClick={handleHost}>
                 HOST
               </span>
-              <Link to='/login' className='link'>
-                <button className='dark-text bold-text login-btn'>Log In</button>
-              </Link>
-              <Link to='/signup' className='link'>
-                <button className='bold-text signup-btn'>Sign Up</button>
-              </Link>
+              {currentUser ? (
+                <>
+                  <Link to='/dashboard' className='link'>
+                    <button className='dark-text bold-text dark-btn '>Dashboard</button>
+                  </Link>
+                  <button className='bold-text light-btn right-btn' onClick={handleLogout}>
+                    Log Out
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link to='/login' className='link'>
+                    <button className='dark-text bold-text light-btn'>Log In</button>
+                  </Link>
+                  <Link to='/signup' className='link'>
+                    <button className='bold-text dark-btn right-btn'>Sign Up</button>
+                  </Link>
+                </>
+              )}
             </>
           )}
           {page === 'login' && (
