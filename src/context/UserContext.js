@@ -22,15 +22,11 @@ export const UserContextProvider = ({ children }) => {
           dispatch({ type: 'LOGIN', payload: res.data.data })
         })
         .catch((err) => {
-          console.log('remove token')
           localStorage.removeItem(tokenKey)
           console.error(err)
         })
     }
-  }, [])
-
-  console.log('token', token)
-  console.log('currentUser', state.user)
+  }, [token])
 
   return (
     (!token || state.user) && (
