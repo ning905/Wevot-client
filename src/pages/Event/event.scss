@@ -1,0 +1,220 @@
+.event {
+  min-height: 100vh;
+  background: radial-gradient(
+        65.24% 47.39% at 58.3% 116.11%,
+        rgba(227, 119, 159, 0.536) 0%,
+        rgba(241, 127, 168, 0.392) 27.08%,
+        rgba(252, 150, 187, 0) 100%
+      )
+      /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+    radial-gradient(
+        74.63% 85.28% at 110.14% 100%,
+        rgba(1, 178, 189, 0.6) 7.29%,
+        rgba(3, 188, 200, 0.282) 58.85%,
+        rgba(47, 217, 227, 0) 100%
+      )
+      /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+    radial-gradient(
+        46.7% 58.61% at 0% 71.33%,
+        rgba(255, 162, 149, 0.672) 10.42%,
+        rgba(255, 169, 141, 0.144) 63.02%,
+        rgba(255, 204, 188, 0) 100%
+      )
+      /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+    radial-gradient(
+        37.29% 39.66% at 18.23% 111.11%,
+        rgba(217, 47, 88, 0.32) 17.71%,
+        rgba(225, 79, 132, 0) 100%
+      )
+      /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+    linear-gradient(327.46deg, #e3e0ff 74.38%, #ffffff 116.67%);
+
+  main {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+
+    .container {
+      position: relative;
+      width: 100%;
+      max-width: 1440px;
+      z-index: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+
+      .poster-wrap {
+        position: absolute;
+        width: 100%;
+        height: 400px;
+        z-index: -1;
+
+        .poster-cover {
+          position: absolute;
+          background-color: rgba(0, 0, 0, 0.6);
+          width: 100%;
+          height: 100%;
+        }
+
+        img {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          z-index: -2;
+        }
+      }
+
+      .text-wrap {
+        color: #ffffff;
+        margin-top: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        width: fit-content;
+        max-width: 50%;
+
+        h2 {
+          font-weight: 700;
+          font-size: 2rem;
+          line-height: 154%;
+        }
+
+        p {
+          font-family: 'Roboto';
+          font-size: 1.25rem;
+          line-height: 28px;
+        }
+      }
+
+      .deadline-wrap {
+        padding: 1rem 2rem;
+        background-color: #000;
+        width: fit-content;
+
+        p {
+          color: #fff;
+          font-weight: 600;
+          font-size: 1.25rem;
+          letter-spacing: 0.1em;
+        }
+      }
+
+      .invitation-wrap {
+        color: #d6d6d6;
+        width: 50%;
+        display: grid;
+        gap: 10px;
+
+        p {
+          font-size: 1.2rem;
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 10px;
+        }
+      }
+
+      .slots-wrap {
+        width: 55%;
+        background: linear-gradient(0deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
+          radial-gradient(
+              65.24% 47.39% at 58.3% 116.11%,
+              rgba(227, 119, 159, 0.536) 0%,
+              rgba(241, 127, 168, 0.392) 27.08%,
+              rgba(252, 150, 187, 0) 100%
+            )
+            /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+          radial-gradient(
+              74.63% 85.28% at 110.14% 100%,
+              rgba(1, 178, 189, 0.6) 7.29%,
+              rgba(3, 188, 200, 0.282) 58.85%,
+              rgba(47, 217, 227, 0) 100%
+            )
+            /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+          radial-gradient(
+              46.7% 58.61% at 0% 71.33%,
+              rgba(255, 162, 149, 0.672) 10.42%,
+              rgba(255, 169, 141, 0.144) 63.02%,
+              rgba(255, 204, 188, 0) 100%
+            )
+            /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+          radial-gradient(
+              37.29% 39.66% at 18.23% 111.11%,
+              rgba(217, 47, 88, 0.32) 17.71%,
+              rgba(225, 79, 132, 0) 100%
+            )
+            /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+          linear-gradient(327.46deg, #e3e0ff 74.38%, #ffffff 116.67%);
+        /* EF 1 */
+
+        box-shadow: 0px 0px 20px rgba(107, 107, 238, 0.4);
+        border-radius: 25px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .title-wrap {
+          width: 100%;
+          border-bottom: 1px solid #d6d6d6;
+          text-align: center;
+          padding: 1.4rem 0 1rem 0;
+
+          p {
+            font-family: 'Roboto';
+            font-size: 1.15rem;
+            color: #211c70;
+          }
+        }
+
+        ul {
+          width: 100%;
+          padding: 1.4rem 2rem;
+          display: flex;
+          flex-direction: column;
+          gap: 0.7rem;
+        }
+
+        .action-wrap {
+          width: 100%;
+          border-top: 1px solid #d6d6d6;
+          padding: 1rem 2rem;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          p {
+            padding-left: 0.5rem;
+            cursor: default;
+            font-size: 1rem;
+
+            &.success {
+              font-weight: 600;
+              letter-spacing: 0.1rem;
+            }
+
+            &.error {
+              font-weight: 600;
+              color: #e15838;
+            }
+          }
+
+          button {
+            background: #8e8edb;
+            border-radius: 33px;
+            border: none;
+            width: 11.5rem;
+            height: 3rem;
+            font-weight: 600;
+            font-size: 1.25rem;
+            color: #ffffff;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}

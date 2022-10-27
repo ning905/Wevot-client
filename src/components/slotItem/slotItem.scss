@@ -1,0 +1,32 @@
+.slot-item {
+  background: #ffffff;
+  border: 1px solid #5a5a5a;
+  border-radius: 10px;
+  height: 4.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.2rem;
+
+  &.selectable {
+    cursor: pointer;
+
+    &:hover {
+      background: linear-gradient(0deg, rgba(84, 84, 84, 0.2), rgba(84, 84, 84, 0.2)), #ffffff;
+      border: 2px solid #16dcf4;
+    }
+  }
+
+  &.selected {
+    background: linear-gradient(0deg, rgba(84, 84, 84, 0.2), rgba(84, 84, 84, 0.2)), #ffffff;
+    border: 2px solid #16dcf4;
+  }
+
+  .time-wrap {
+    font-weight: 500;
+    font-size: 1.125rem;
+    display: flex;
+    align-items: center;
+    color: #38374d;
+  }
+}
