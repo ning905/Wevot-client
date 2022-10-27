@@ -2,7 +2,7 @@ import './joinForm.scss'
 import { Dialog, DialogActions, DialogContent, TextField } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { getCustomInputStyles } from '../../utils/muiCustomTheme'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { areAllFieldsValid, error } from '../../utils/validRegex'
 import client from '../../utils/client'
 import { UserContext } from '../../context/UserContext'
@@ -21,14 +21,16 @@ const initInputs = {
 
 export default function JoinForm({ open, setOpen }) {
   const { currentUser } = useContext(UserContext)
-  if (currentUser) {
-    initInputs.email = currentUser.email
-  }
-
   const [inputs, setInputs] = useState(initInputs)
   const [alert, setAlert] = useState(initInputAlert)
   const [resErr, setResErr] = useState('')
   const navigate = useNavigate()
+
+  useEffect(() => {
+    if (currentUser) {
+      setInputs((inputs) => ({ ...inputs, email: currentUser.email }))
+    }
+  }, [currentUser])
 
   function handleClose() {
     setOpen(false)

@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { UserContext } from '../../context/UserContext'
 import JoinForm from '../joinForm/JoinForm'
 import './navbar.scss'
@@ -8,6 +8,7 @@ export default function Navbar({ page }) {
   const [open, setOpen] = useState(false)
   const { currentUser, userAction } = useContext(UserContext)
   const navigate = useNavigate()
+  const location = useLocation()
 
   function handleHost() {
     return currentUser ? navigate('/events/create') : navigate('/login')
@@ -18,12 +19,11 @@ export default function Navbar({ page }) {
   }
 
   function handleLogout() {
-    localStorage.removeItem(process.env.REACT_APP_USER_TOKEN)
-    userAction({ type: 'LOGOUT' })
-
-    if (page !== 'init') {
+    if (location.pathname !== '/') {
       navigate('/login')
     }
+    userAction({ type: 'LOGOUT' })
+    localStorage.removeItem(process.env.REACT_APP_USER_TOKEN)
   }
 
   return (
