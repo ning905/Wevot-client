@@ -9,13 +9,15 @@ export default function EventItem({ event }) {
   const initial = event.title[0].toUpperCase()
   const defaultPoster = `http://ui-avatars.com/api/?bold=true&background=CACACA&color=fff&name=${initial}`
   const navigate = useNavigate()
-  const [status, setStatus] = useState('Pending')
+  const [status, setStatus] = useState('')
   const [voted, setVoted] = useState({ status: false })
   const { currentUser } = useContext(UserContext)
 
   useEffect(() => {
     if (new Date(event.invitation.expiresAt) < new Date()) {
       setStatus('Closed')
+    } else {
+      setStatus('Pending')
     }
 
     const findParticipant = event.participants.find(

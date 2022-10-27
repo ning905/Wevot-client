@@ -69,7 +69,7 @@ export default function Event() {
         setAlert(initVoteAlert)
       }, '1500')
     } else if (!userInfo.email) {
-      setAlert({ status: 'error', content: 'You must provide you email' })
+      setAlert({ status: 'error', content: 'Click JOIN and provide you email before submitting' })
     } else {
       client
         .post(`/events/participate/${event.invitation.id}`, { ...userInfo, votedSlots })

@@ -23,6 +23,7 @@ export default function JoinForm({ open, setOpen }) {
   const { currentUser } = useContext(UserContext)
   const [inputs, setInputs] = useState(initInputs)
   const [alert, setAlert] = useState(initInputAlert)
+  const [joinAnother, setJoinAnother] = useState(false)
   const [resErr, setResErr] = useState('')
   const navigate = useNavigate()
   const location = useLocation()
@@ -30,6 +31,8 @@ export default function JoinForm({ open, setOpen }) {
   const visitViaLink = location.pathname.includes('/participate')
 
   useEffect(() => {
+    setJoinAnother(false)
+
     if (currentUser) {
       setInputs((inputs) => ({ ...inputs, email: currentUser.email }))
     }
@@ -57,6 +60,11 @@ export default function JoinForm({ open, setOpen }) {
     setInputs({ ...inputs, [name]: value })
   }
 
+  function handleJoinAnother() {
+    setJoinAnother(true)
+    setInputs({ ...inputs, code: '' })
+  }
+
   function handleJoin() {
     if (areAllFieldsValid(initInputs, inputs, alert, setAlert)) {
       if (visitViaLink) {
@@ -78,18 +86,14 @@ export default function JoinForm({ open, setOpen }) {
   }
 
   return (
-    <Dialog
-      open={open}
-      onClose={visitViaLink ? undefined : handleClose}
-      className='join-form-dialog'
-    >
+    <Dialog open={open} onClose={handleClose} className='join-form-dialog'>
       <div className='text-wrap'>
         <h2>Please provide the event code</h2>
         {resErr && <p className='error'>Failed: {resErr}</p>}
       </div>
 
       <DialogContent className='inputs-wrap'>
-        {!param.code && (
+        {(!visitViaLink || joinAnother) && (
           <TextField
             required
             className='input-field'
@@ -137,6 +141,11 @@ export default function JoinForm({ open, setOpen }) {
         <button onClick={handleJoin} className='join-btn'>
           JOIN
         </button>
+        {visitViaLink && (
+          <button onClick={handleJoinAnother} className='join-another-btn'>
+            JOIN Another
+          </button>
+        )}
       </DialogActions>
     </Dialog>
   )
