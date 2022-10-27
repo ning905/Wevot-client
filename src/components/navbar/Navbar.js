@@ -19,11 +19,11 @@ export default function Navbar({ page }) {
   }
 
   function handleLogout() {
+    localStorage.removeItem(process.env.REACT_APP_USER_TOKEN)
     if (location.pathname !== '/') {
       navigate('/login')
     }
     userAction({ type: 'LOGOUT' })
-    localStorage.removeItem(process.env.REACT_APP_USER_TOKEN)
   }
 
   return (

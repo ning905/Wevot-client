@@ -29,6 +29,7 @@ export function fieldHasContent(fieldKey, filedValue, alert, setAlert) {
 
 export function areAllFieldsValid(initInputs, inputs, alert, setAlert) {
   const inputKeys = Object.keys(initInputs)
+
   for (let i = 0; i < inputKeys.length; i++) {
     const key = inputKeys[i]
 
