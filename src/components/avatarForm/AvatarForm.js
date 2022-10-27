@@ -33,12 +33,10 @@ export default function AvatarForm({ open, setOpen }) {
       client
         .patch(`/users/${currentUser.id}`, { profileImgUrl: url })
         .then((res) => {
-          console.log(res)
           userAction({ type: 'UPDATE', payload: res.data.data })
           handleClose()
         })
         .catch((res) => {
-          console.log(res)
           setResErr(res.response.data.message)
         })
     }

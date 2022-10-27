@@ -27,16 +27,22 @@ export default function Dashboard() {
     client
       .get('/events')
       .then((res) => {
-        console.log('events response: ', res)
         setEvents(res.data.data)
       })
       .catch((res) => {
-        console.log('response: ', res.response.data)
+        console.error(res)
       })
-  }, [])
+  }, [currentUser])
 
   function handleClickOpenDialog() {
     setOpenDialog(true)
+  }
+
+  function getFilterClassName(selected, option) {
+    if (selected === option) {
+      return 'selected'
+    }
+    return undefined
   }
 
   let filteredEvents = events
@@ -100,19 +106,19 @@ export default function Dashboard() {
               <h3>Menu</h3>
 
               <div className='option-wrap'>
-                <p className={menuFilter === '' && 'selected'} onClick={() => setMenuFilter('')}>
+                <p className={getFilterClassName(menuFilter, '')} onClick={() => setMenuFilter('')}>
                   <HomeOutlined sx={{ width: '35px', height: '35px' }} />
                   All Events
                 </p>
                 <p
-                  className={menuFilter === 'hosted' && 'selected'}
+                  className={getFilterClassName(menuFilter, 'hosted')}
                   onClick={() => setMenuFilter('hosted')}
                 >
                   <NearMeOutlined sx={{ width: '35px', height: '35px' }} />
                   Hosted
                 </p>
                 <p
-                  className={menuFilter === 'joined' && 'selected'}
+                  className={getFilterClassName(menuFilter, 'joined')}
                   onClick={() => setMenuFilter('joined')}
                 >
                   <LinkOutlined sx={{ width: '35px', height: '35px' }} />
@@ -128,19 +134,19 @@ export default function Dashboard() {
               <h2>My Events</h2>
               <div className='filters'>
                 <p
-                  className={statusFilter === '' && 'selected'}
+                  className={getFilterClassName(statusFilter, '')}
                   onClick={() => setStatusFilter('')}
                 >
                   All
                 </p>
                 <p
-                  className={statusFilter === 'pending' && 'selected'}
+                  className={getFilterClassName(statusFilter, 'pending')}
                   onClick={() => setStatusFilter('pending')}
                 >
                   Pending
                 </p>
                 <p
-                  className={statusFilter === 'closed' && 'selected'}
+                  className={getFilterClassName(statusFilter, 'closed')}
                   onClick={() => setStatusFilter('closed')}
                 >
                   Closed

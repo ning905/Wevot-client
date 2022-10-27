@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../../context/UserContext'
 import dayjs from 'dayjs'
 import './eventItem.scss'
+import { eventItemFormatTime } from '../../utils/formatTime'
 
 export default function EventItem({ event }) {
   const initial = event.title[0].toUpperCase()
@@ -12,21 +13,20 @@ export default function EventItem({ event }) {
   const [status, setStatus] = useState('Pending')
   const [voted, setVoted] = useState({ status: false })
   const { currentUser } = useContext(UserContext)
-  const formattedTime = dayjs(new Date(event.invitation.expiresAt)).format('DD MMM YYYY')
-  const findParticipant = event.participants.find(
-    (participant) => participant.email === currentUser.email
-  )
-  console.log('findParticipant', findParticipant)
 
   useEffect(() => {
     if (event.invitation.expired) {
       setStatus('Closed')
     }
 
+    const findParticipant = event.participants.find(
+      (participant) => participant.email === currentUser.email
+    )
+    console.log('findParticipant', findParticipant)
     if (findParticipant) {
       setVoted({ status: true, votedSlots: findParticipant.votedSlots })
     }
-  }, [event, findParticipant])
+  }, [event, currentUser])
 
   function handleVisit() {
     navigate(`/events/${event.id}`)
@@ -54,7 +54,9 @@ export default function EventItem({ event }) {
           {voted.status ? (
             <p className='voted-slots'>{voted.votedSlots?.length} slots selected</p>
           ) : (
-            <p className='voted-slots'>Vote before {formattedTime}</p>
+            <p className='voted-slots'>
+              Vote before {eventItemFormatTime(event.invitation.expiresAt)}
+            </p>
           )}
         </div>
       </div>

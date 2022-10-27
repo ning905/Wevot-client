@@ -1,6 +1,5 @@
 import { FormControl, InputAdornment, OutlinedInput } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
-import './searchBar.scss'
 
 export default function SearchBar({ query, setQuery }) {
   function handleInput(e) {
