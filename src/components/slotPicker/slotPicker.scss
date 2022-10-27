@@ -1,0 +1,12 @@
+.slot-picker {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1.5fr auto 1.5fr 1fr;
+  align-items: center;
+
+  .click-to-add {
+    color: #3c8cd7;
+    cursor: pointer;
+    justify-self: center;
+  }
+}

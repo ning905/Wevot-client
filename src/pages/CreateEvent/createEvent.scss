@@ -1,0 +1,186 @@
+.create-event {
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: radial-gradient(
+        65.24% 47.39% at 58.3% 116.11%,
+        rgba(227, 119, 159, 0.536) 0%,
+        rgba(241, 127, 168, 0.392) 27.08%,
+        rgba(252, 150, 187, 0) 100%
+      )
+      /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+    radial-gradient(
+        74.63% 85.28% at 110.14% 100%,
+        rgba(1, 178, 189, 0.6) 7.29%,
+        rgba(3, 188, 200, 0.282) 58.85%,
+        rgba(47, 217, 227, 0) 100%
+      )
+      /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+    radial-gradient(
+        46.7% 58.61% at 0% 71.33%,
+        rgba(255, 162, 149, 0.672) 10.42%,
+        rgba(255, 169, 141, 0.144) 63.02%,
+        rgba(255, 204, 188, 0) 100%
+      )
+      /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+    radial-gradient(
+        37.29% 39.66% at 18.23% 111.11%,
+        rgba(217, 47, 88, 0.32) 17.71%,
+        rgba(225, 79, 132, 0) 100%
+      )
+      /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+    linear-gradient(327.46deg, #e3e0ff 74.38%, #ffffff 116.67%);
+
+  .go-back-wrap {
+    cursor: pointer;
+    color: #16dcf4;
+    margin-top: 2rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    .go-back {
+      display: flex;
+      align-items: center;
+      margin: 0 100px;
+      width: 100%;
+      max-width: 1440px;
+
+      &:hover {
+        color: #8e8edb;
+      }
+
+      .icon {
+        height: 1rem;
+        width: 2rem;
+      }
+    }
+  }
+
+  main {
+    max-width: 1440px;
+    width: 70%;
+    margin: 3rem 0;
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
+      radial-gradient(
+          65.24% 47.39% at 58.3% 116.11%,
+          rgba(227, 119, 159, 0.536) 0%,
+          rgba(241, 127, 168, 0.392) 27.08%,
+          rgba(252, 150, 187, 0) 100%
+        )
+        /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+      radial-gradient(
+          74.63% 85.28% at 110.14% 100%,
+          rgba(1, 178, 189, 0.6) 7.29%,
+          rgba(3, 188, 200, 0.282) 58.85%,
+          rgba(47, 217, 227, 0) 100%
+        )
+        /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+      radial-gradient(
+          46.7% 58.61% at 0% 71.33%,
+          rgba(255, 162, 149, 0.672) 10.42%,
+          rgba(255, 169, 141, 0.144) 63.02%,
+          rgba(255, 204, 188, 0) 100%
+        )
+        /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+      radial-gradient(
+          37.29% 39.66% at 18.23% 111.11%,
+          rgba(217, 47, 88, 0.32) 17.71%,
+          rgba(225, 79, 132, 0) 100%
+        )
+        /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+      linear-gradient(327.46deg, #e3e0ff 74.38%, #ffffff 116.67%);
+    box-shadow: 0px 0px 30px rgba(107, 107, 238, 0.3);
+    border-radius: 20px;
+
+    .container {
+      padding: 2rem 4rem;
+
+      h2 {
+        font-weight: 600;
+        font-size: 2rem;
+        color: #211c70;
+      }
+
+      .box {
+        margin: 1.5rem 0;
+        display: grid;
+        gap: 1rem;
+
+        ul {
+          list-style: none;
+          display: grid;
+          gap: 1rem;
+        }
+
+        .input-wrap {
+          display: flex;
+          padding: 0 2rem;
+          align-items: center;
+          justify-content: space-between;
+
+          .left {
+            color: #4b4b4b;
+          }
+
+          .right {
+            width: 80%;
+          }
+        }
+
+        .click-to-add {
+          color: #3c8cd7;
+          cursor: pointer;
+          padding-left: 2rem;
+        }
+
+        .btn-wrap {
+          margin-top: 1rem;
+          display: flex;
+          justify-content: space-around;
+
+          button {
+            width: 21.5rem;
+            height: 3rem;
+            border-radius: 33px;
+            font-size: 1.25rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+
+            &.submit-btn {
+              color: #fff;
+              background-color: #8e8edb;
+              border: none;
+
+              &:hover {
+                background-color: #6b67aa;
+                border: 2px solid #16dcf4;
+              }
+            }
+
+            &.cancel-btn {
+              background-color: rgba(142, 142, 219, 0.2);
+              border: 2px solid #8e8edb;
+              color: #6b67aa;
+
+              &:hover {
+                background-color: rgba(255, 255, 255, 0.5);
+              }
+            }
+          }
+        }
+
+        p {
+          &#fail-alert {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #e15838;
+          }
+        }
+      }
+    }
+  }
+}
