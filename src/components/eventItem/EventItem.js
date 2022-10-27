@@ -14,7 +14,7 @@ export default function EventItem({ event }) {
   const { currentUser } = useContext(UserContext)
 
   useEffect(() => {
-    if (event.invitation.expired) {
+    if (new Date(event.invitation.expiresAt) < new Date()) {
       setStatus('Closed')
     }
 

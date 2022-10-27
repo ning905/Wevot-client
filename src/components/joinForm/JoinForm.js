@@ -1,6 +1,6 @@
 import './joinForm.scss'
 import { Dialog, DialogActions, DialogContent, TextField } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { getCustomInputStyles } from '../../utils/muiCustomTheme'
 import { useContext, useEffect, useState } from 'react'
 import { areAllFieldsValid, error } from '../../utils/validRegex'
@@ -25,12 +25,18 @@ export default function JoinForm({ open, setOpen }) {
   const [alert, setAlert] = useState(initInputAlert)
   const [resErr, setResErr] = useState('')
   const navigate = useNavigate()
+  const location = useLocation()
+  const param = useParams()
+  const visitViaLink = location.pathname.includes('/participate')
 
   useEffect(() => {
     if (currentUser) {
       setInputs((inputs) => ({ ...inputs, email: currentUser.email }))
     }
-  }, [currentUser])
+    if (visitViaLink) {
+      setInputs((inputs) => ({ ...inputs, code: param.code }))
+    }
+  }, [currentUser, param.code, visitViaLink])
 
   function handleClose() {
     setOpen(false)
@@ -53,40 +59,51 @@ export default function JoinForm({ open, setOpen }) {
 
   function handleJoin() {
     if (areAllFieldsValid(initInputs, inputs, alert, setAlert)) {
-      client
-        .get(`/events/participate/${inputs.code}`)
-        .then((res) => {
-          if (res.data.status === 'success') {
-            navigate(`/events/participate/${inputs.code}`, { state: { userInfo: inputs } })
-          }
-        })
-        .catch((res) => {
-          setResErr(res.response.data.message)
-        })
+      if (visitViaLink) {
+        navigate(`/events/participate/${inputs.code}`, { state: { userInfo: inputs } })
+        handleClose()
+      } else {
+        client
+          .get(`/events/participate/${inputs.code}`)
+          .then((res) => {
+            if (res.data.status === 'success') {
+              navigate(`/events/participate/${inputs.code}`, { state: { userInfo: inputs } })
+            }
+          })
+          .catch((res) => {
+            setResErr(res.response.data.message)
+          })
+      }
     }
   }
 
   return (
-    <Dialog open={open} onClose={handleClose} className='join-form-dialog'>
+    <Dialog
+      open={open}
+      onClose={visitViaLink ? undefined : handleClose}
+      className='join-form-dialog'
+    >
       <div className='text-wrap'>
         <h2>Please provide the event code</h2>
         {resErr && <p className='error'>Failed: {resErr}</p>}
       </div>
 
       <DialogContent className='inputs-wrap'>
-        <TextField
-          required
-          className='input-field'
-          variant='standard'
-          label='EVENT CODE'
-          type='text'
-          name='code'
-          value={inputs.code}
-          color={alert.code.status}
-          helperText={alert.code.content}
-          sx={getCustomInputStyles(alert.code)}
-          onChange={handleInput}
-        />
+        {!param.code && (
+          <TextField
+            required
+            className='input-field'
+            variant='standard'
+            label='EVENT CODE'
+            type='text'
+            name='code'
+            value={inputs.code}
+            color={alert.code.status}
+            helperText={alert.code.content}
+            sx={getCustomInputStyles(alert.code)}
+            onChange={handleInput}
+          />
+        )}
         {!currentUser && (
           <>
             <TextField

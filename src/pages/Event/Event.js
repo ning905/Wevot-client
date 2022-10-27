@@ -8,6 +8,7 @@ import './event.scss'
 import { eventPageFormatTime } from '../../utils/formatTime'
 import ClipboardCopy from '../../components/clipboardCopy/ClipboardCopy'
 import { ArrowBackIosOutlined } from '@mui/icons-material'
+import JoinForm from '../../components/joinForm/JoinForm'
 
 export const initVoteAlert = { status: '', content: '' }
 
@@ -15,6 +16,7 @@ export default function Event() {
   const [event, setEvent] = useState()
   const [expired, setExpired] = useState(false)
   const [userInfo, setUserInfo] = useState({})
+  const [openUserInfoDialog, setOpenUserInfoDialog] = useState(false)
   const [isParticipant, setIsParticipant] = useState(false)
   const [votedSlots, setVotedSlots] = useState([])
   const [alert, setAlert] = useState(initVoteAlert)
@@ -28,7 +30,12 @@ export default function Event() {
 
     if (location.pathname.includes('/participate')) {
       url = `/events/participate/${param.code}`
-      setUserInfo({ ...location.state.userInfo })
+
+      if (location.state) {
+        setUserInfo({ ...location.state.userInfo })
+      } else {
+        setOpenUserInfoDialog(true)
+      }
     } else if (currentUser) {
       setUserInfo({ email: currentUser.email, name: currentUser.username })
     }
@@ -61,6 +68,8 @@ export default function Event() {
       setTimeout(() => {
         setAlert(initVoteAlert)
       }, '1500')
+    } else if (!userInfo.email) {
+      setAlert({ status: 'error', content: 'You must provide you email' })
     } else {
       client
         .post(`/events/participate/${event.invitation.id}`, { ...userInfo, votedSlots })
@@ -107,6 +116,8 @@ export default function Event() {
   return (
     <div className='event'>
       <Navbar page='init' />
+
+      {openUserInfoDialog && <JoinForm open={openUserInfoDialog} setOpen={setOpenUserInfoDialog} />}
 
       {event && (
         <main>
@@ -180,6 +191,7 @@ export default function Event() {
                     setVotedSlots={setVotedSlots}
                     setAlert={setAlert}
                     isParticipant={isParticipant}
+                    expired={expired}
                   />
                 ))}
               </ul>
