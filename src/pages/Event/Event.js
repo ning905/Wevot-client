@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
-import { useLocation, useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import Navbar from '../../components/navbar/Navbar'
 import SlotItem from '../../components/slotItem/SlotItem'
 import { UserContext } from '../../context/UserContext'
@@ -7,6 +7,7 @@ import client from '../../utils/client'
 import './event.scss'
 import { eventPageFormatTime } from '../../utils/formatTime'
 import ClipboardCopy from '../../components/clipboardCopy/ClipboardCopy'
+import { ArrowBackIosOutlined } from '@mui/icons-material'
 
 export const initVoteAlert = { status: '', content: '' }
 
@@ -20,6 +21,7 @@ export default function Event() {
   const { currentUser } = useContext(UserContext)
   const location = useLocation()
   const param = useParams()
+  const navigate = useNavigate()
 
   useEffect(() => {
     let url = `/events/${param.id}`
@@ -64,6 +66,7 @@ export default function Event() {
         .post(`/events/participate/${event.invitation.id}`, { ...userInfo, votedSlots })
         .then((res) => {
           setIsParticipant(true)
+          setEvent(res.data.data.event)
           setAlert({ status: 'success', content: 'Votes submitted!' })
           setTimeout(() => {
             setAlert(initVoteAlert)
@@ -86,6 +89,11 @@ export default function Event() {
         .delete(`/events/participate/${event.invitation.id}/${userInfo.email}`)
         .then((res) => {
           setIsParticipant(false)
+          setEvent(res.data.data.event)
+          setAlert({ status: 'success', content: 'Votes withdrawn!' })
+          setTimeout(() => {
+            setAlert(initVoteAlert)
+          }, '3000')
         })
         .catch((res) => {
           setAlert({ status: 'error', content: `Failed: ${res.response.data.message}` })
@@ -103,19 +111,29 @@ export default function Event() {
       {event && (
         <main>
           <div className='container'>
+            {currentUser && (
+              <div className='go-back-wrap' onClick={() => navigate('/dashboard')}>
+                <p className='go-back'>
+                  <ArrowBackIosOutlined className='icon' />
+                  Back to dashboard
+                </p>
+              </div>
+            )}
+
             <div className='poster-wrap'>
-              <div className='poster-cover'></div>
               {event?.posterUrl && (
-                <img
-                  src='https://cdn.shopify.com/s/files/1/0008/7765/8173/products/manchester_whippets_new_for_web.jpg?v=1529681461'
-                  alt='poster'
-                />
+                <>
+                  <div className='poster-cover'></div>
+                  <img src={event?.posterUrl} alt='poster' />
+                </>
               )}
             </div>
 
-            <div className='text-wrap'>
-              <h2>{event?.title}</h2>
-              {event?.description && <p>{event.description}</p>}
+            <div className={event.posterUrl ? 'with-poster text-wrap' : 'text-wrap'}>
+              <h2 className={event.posterUrl ? undefined : 'no-poster'}>{event?.title}</h2>
+              {event?.description && (
+                <p className={event.posterUrl ? undefined : 'no-poster'}>{event.description}</p>
+              )}
             </div>
 
             <div className='deadline-wrap'>
@@ -135,7 +153,9 @@ export default function Event() {
                   Share via link:{' '}
                   <ClipboardCopy
                     copyText={
-                      process.env.REACT_APP_API_URL + '/events/participate/' + event.invitation.id
+                      process.env.REACT_APP_CLIENT_URL +
+                      '/events/participate/' +
+                      event.invitation.id
                     }
                   />
                 </p>
