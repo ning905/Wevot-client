@@ -3,13 +3,20 @@ import { initVoteAlert } from '../../pages/Event/Event'
 import { slotEndFormatTime, slotStartFormatTime } from '../../utils/formatTime'
 import './slotItem.scss'
 
-export default function SlotItem({ slot, votedSlots, setVotedSlots, setAlert, isParticipant }) {
+export default function SlotItem({
+  slot,
+  votedSlots,
+  setVotedSlots,
+  setAlert,
+  isParticipant,
+  expired,
+}) {
   let className = 'slot-item'
   const selected = votedSlots.find((s) => s.id === slot.id)
   if (selected) {
     className += ' selected'
   }
-  if (!isParticipant) {
+  if (!isParticipant && !expired) {
     className += ' selectable'
   }
 
@@ -41,6 +48,8 @@ export default function SlotItem({ slot, votedSlots, setVotedSlots, setAlert, is
       <div className='time-wrap'>
         {slotStartFormatTime(slot.startTime)} - {slotEndFormatTime(slot.startTime, slot.endTime)}
       </div>
+
+      {slot.location && <div className='location-wrap'>{slot.location}</div>}
 
       <div className='votes-wrap'>
         <AvatarGroup max={4}>

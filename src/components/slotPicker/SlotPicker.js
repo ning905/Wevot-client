@@ -23,7 +23,6 @@ export default function SlotPicker({ index, slot, slots, setSlots }) {
 
   return (
     <div className='slot-picker'>
-      {/* <div className='time-picker-wrap'> */}
       <LocalizationProvider dateAdapter={AdapterDayjs} className='time-picker'>
         <DateTimePicker
           disablePast
@@ -51,9 +50,7 @@ export default function SlotPicker({ index, slot, slots, setSlots }) {
           }
         />
       </LocalizationProvider>
-      {/* </div> */}
 
-      {/* <div className='location-wrap'> */}
       {needsLocation ? (
         <TextField
           className='input-field'
@@ -70,7 +67,6 @@ export default function SlotPicker({ index, slot, slots, setSlots }) {
           + Add location
         </p>
       )}
-      {/* </div> */}
     </div>
   )
 }

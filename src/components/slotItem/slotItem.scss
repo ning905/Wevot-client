@@ -3,9 +3,10 @@
   border: 1px solid #5a5a5a;
   border-radius: 10px;
   height: 4.4rem;
-  display: flex;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
   align-items: center;
-  justify-content: space-between;
+  // justify-content: space-between;
   padding: 0 1.2rem;
 
   &.selectable {
@@ -22,7 +23,8 @@
     border: 2px solid #16dcf4;
   }
 
-  .time-wrap {
+  .time-wrap,
+  .location-wrap {
     font-weight: 500;
     font-size: 1.125rem;
     display: flex;
