@@ -2,7 +2,6 @@ import { FiberManualRecord, PersonOutlineOutlined } from '@mui/icons-material'
 import { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../../context/UserContext'
-import dayjs from 'dayjs'
 import './eventItem.scss'
 import { eventItemFormatTime } from '../../utils/formatTime'
 
@@ -22,7 +21,6 @@ export default function EventItem({ event }) {
     const findParticipant = event.participants.find(
       (participant) => participant.email === currentUser.email
     )
-    console.log('findParticipant', findParticipant)
     if (findParticipant) {
       setVoted({ status: true, votedSlots: findParticipant.votedSlots })
     }
@@ -55,7 +53,7 @@ export default function EventItem({ event }) {
             <p className='voted-slots'>{voted.votedSlots?.length} slots selected</p>
           ) : (
             <p className='voted-slots'>
-              Vote before {eventItemFormatTime(event.invitation.expiresAt)}
+              Vote before <strong>{eventItemFormatTime(event.invitation.expiresAt)}</strong>
             </p>
           )}
         </div>

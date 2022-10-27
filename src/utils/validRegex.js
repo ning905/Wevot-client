@@ -20,7 +20,6 @@ export const error = {
 }
 
 export function fieldHasContent(fieldKey, filedValue, alert, setAlert) {
-  console.log('checking: ', fieldKey)
   if (!filedValue) {
     setAlert({ ...alert, [fieldKey]: error.emptyField })
     return false
