@@ -2,10 +2,11 @@ import './signup.scss'
 import Navbar from '../../components/navbar/Navbar'
 import { TextField, Box } from '@mui/material'
 import { getCustomInputStyles } from '../../utils/muiCustomTheme'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { areAllFieldsValid, error, userValidRegex } from '../../utils/validRegex'
 import client from '../../utils/client'
+import { UserContext } from '../../context/UserContext'
 
 const initInputs = {
   username: '',
@@ -24,13 +25,18 @@ const initAlert = {
 export default function Signup() {
   const [inputs, setInputs] = useState(initInputs)
   const [alert, setAlert] = useState(initAlert)
-  const navigate = useNavigate()
   const [serverError, setServerError] = useState('')
+  const { currentUser } = useContext(UserContext)
+  const navigate = useNavigate()
 
   useEffect(() => {
     setInputs(initInputs)
     setAlert(initAlert)
-  }, [])
+
+    if (currentUser) {
+      navigate('/dashboard')
+    }
+  }, [currentUser])
 
   function handleInput(e) {
     const { name, value } = e.target

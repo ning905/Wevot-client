@@ -6,6 +6,12 @@ const UserReducer = (state, action) => {
       }
     }
 
+    case 'UPDATE': {
+      return {
+        user: action.payload,
+      }
+    }
+
     case 'LOGOUT': {
       return {
         user: null,

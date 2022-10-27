@@ -3,7 +3,7 @@ import Navbar from '../../components/navbar/Navbar'
 import { TextField, Box } from '@mui/material'
 import { getCustomInputStyles } from '../../utils/muiCustomTheme'
 import { Link, useNavigate } from 'react-router-dom'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { error, fieldHasContent } from '../../utils/validRegex'
 import client from '../../utils/client'
 import { UserContext } from '../../context/UserContext'
@@ -19,8 +19,14 @@ export default function Login() {
   const [inputs, setInputs] = useState(initInputs)
   const [alert, setAlert] = useState(initAlert)
   const [accountError, setAccountError] = useState('')
-  const { userAction } = useContext(UserContext)
+  const { currentUser, userAction } = useContext(UserContext)
   const navigate = useNavigate()
+
+  useEffect(() => {
+    if (currentUser) {
+      navigate('/dashboard')
+    }
+  }, [currentUser])
 
   function handleInput(e) {
     setAccountError('')

@@ -2,6 +2,7 @@ import { createContext, useEffect, useReducer } from 'react'
 import jwt_decode from 'jwt-decode'
 import client from '../utils/client'
 import UserReducer from './userReducer'
+import { Navigate, useNavigate } from 'react-router-dom'
 
 const tokenKey = process.env.REACT_APP_USER_TOKEN
 const token = localStorage.getItem(tokenKey) || null
@@ -18,7 +19,6 @@ export const UserContextProvider = ({ children }) => {
       client
         .get(`/users/${username}`)
         .then((res) => {
-          console.log('response', res)
           dispatch({ type: 'LOGIN', payload: res.data.data })
         })
         .catch((err) => {
