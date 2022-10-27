@@ -88,7 +88,7 @@ export default function JoinForm({ open, setOpen }) {
   return (
     <Dialog open={open} onClose={handleClose} className='join-form-dialog'>
       <div className='text-wrap'>
-        <h2>Please provide the event code</h2>
+        <h2>Please provide your details</h2>
         {resErr && <p className='error'>Failed: {resErr}</p>}
       </div>
 

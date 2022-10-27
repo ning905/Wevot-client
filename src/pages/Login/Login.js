@@ -14,6 +14,7 @@ const initAlert = {
   identifier: { status: '', content: ' ' },
   password: { status: '', content: ' ' },
 }
+const tokenKey = process.env.REACT_APP_USER_TOKEN
 
 export default function Login() {
   const [inputs, setInputs] = useState(initInputs)
@@ -23,7 +24,7 @@ export default function Login() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (currentUser) {
+    if (currentUser && localStorage.getItem(tokenKey)) {
       navigate('/dashboard')
     }
   }, [currentUser])

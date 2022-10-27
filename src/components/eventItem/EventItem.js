@@ -12,9 +12,10 @@ export default function EventItem({ event }) {
   const [status, setStatus] = useState('')
   const [voted, setVoted] = useState({ status: false })
   const { currentUser } = useContext(UserContext)
+  const closed = new Date(event.invitation.expiresAt) < new Date()
 
   useEffect(() => {
-    if (new Date(event.invitation.expiresAt) < new Date()) {
+    if (closed) {
       setStatus('Closed')
     } else {
       setStatus('Pending')
@@ -26,7 +27,7 @@ export default function EventItem({ event }) {
     if (findParticipant) {
       setVoted({ status: true, votedSlots: findParticipant.votedSlots })
     }
-  }, [event, currentUser])
+  }, [event, currentUser, closed])
 
   function handleVisit() {
     navigate(`/events/${event.id}`)
@@ -53,6 +54,8 @@ export default function EventItem({ event }) {
 
           {voted.status ? (
             <p className='voted-slots'>{voted.votedSlots?.length} slots selected</p>
+          ) : closed ? (
+            <p className='voted-slots'>Closed</p>
           ) : (
             <p className='voted-slots'>
               Vote before <strong>{eventItemFormatTime(event.invitation.expiresAt)}</strong>

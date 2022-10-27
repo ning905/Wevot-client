@@ -197,7 +197,13 @@ export default function CreateEvent() {
               <ul className='right'>
                 {slots.map((slot, index) => (
                   <li key={index} className='slot-wrap'>
-                    <SlotPicker index={index} slot={slot} slots={slots} setSlots={setSlots} />
+                    <SlotPicker
+                      index={index}
+                      slot={slot}
+                      slots={slots}
+                      setSlots={setSlots}
+                      deadline={inputs.deadline}
+                    />
                   </li>
                 ))}
               </ul>

@@ -5,7 +5,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { TextField } from '@mui/material'
 import { useEffect, useState } from 'react'
 
-export default function SlotPicker({ index, slot, slots, setSlots }) {
+export default function SlotPicker({ index, slot, slots, setSlots, deadline }) {
   const [needsLocation, setNeedsLocation] = useState(false)
   const [slotInputs, setSlotInputs] = useState(slot)
 
@@ -26,6 +26,7 @@ export default function SlotPicker({ index, slot, slots, setSlots }) {
       <LocalizationProvider dateAdapter={AdapterDayjs} className='time-picker'>
         <DateTimePicker
           disablePast
+          minDateTime={dayjs(deadline)}
           renderInput={(props) => <TextField {...props} />}
           label='Start Time'
           name='startTime'
@@ -40,6 +41,7 @@ export default function SlotPicker({ index, slot, slots, setSlots }) {
 
       <LocalizationProvider dateAdapter={AdapterDayjs} className='time-picker'>
         <DateTimePicker
+          disablePast
           minDateTime={dayjs(slotInputs.startTime)}
           renderInput={(props) => <TextField {...props} />}
           label='End Time'

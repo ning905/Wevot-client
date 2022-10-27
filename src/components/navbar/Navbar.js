@@ -22,6 +22,8 @@ export default function Navbar({ page }) {
     localStorage.removeItem(process.env.REACT_APP_USER_TOKEN)
     if (location.pathname !== '/') {
       navigate('/login')
+    } else {
+      navigate('/')
     }
     userAction({ type: 'LOGOUT' })
   }

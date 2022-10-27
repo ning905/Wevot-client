@@ -44,12 +44,12 @@ export default function SlotItem({
   }
 
   return (
-    <div className={className} onClick={handleSelect}>
+    <div className={className} onClick={!isParticipant && !expired ? handleSelect : undefined}>
       <div className='time-wrap'>
         {slotStartFormatTime(slot.startTime)} - {slotEndFormatTime(slot.startTime, slot.endTime)}
       </div>
 
-      {slot.location && <div className='location-wrap'>{slot.location}</div>}
+      <div className='location-wrap'>{slot.location}</div>
 
       <div className='votes-wrap'>
         <AvatarGroup max={4}>
