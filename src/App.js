@@ -54,6 +54,14 @@ function App() {
                 }
               />
               <Route
+                path='edit/:id'
+                element={
+                  <RequireAuth>
+                    <CreateEvent />
+                  </RequireAuth>
+                }
+              />
+              <Route
                 path=':id'
                 element={
                   <RequireAuth>

@@ -1,21 +1,26 @@
 .event-item {
   height: 90px;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: 1fr auto;
+  background: #ffffff;
+  box-shadow: 0px 4px 4px rgba(123, 97, 255, 0.1);
+  border-radius: 10px;
+  align-items: center;
+
+  &:hover {
+    border: 2px solid #6b6bee;
+  }
 
   .wrap {
     height: 100%;
-    background: #ffffff;
-    box-shadow: 0px 4px 4px rgba(123, 97, 255, 0.1);
-    border-radius: 10px;
     display: grid;
     grid-auto-flow: column;
-    grid-template-columns: 1.8fr 1fr 1.5fr;
+    grid-template-columns: 2fr 0.5fr 1fr;
     align-items: center;
+    gap: 3rem;
     padding: 0 1.4rem;
     cursor: pointer;
-
-    &:hover {
-      border: 2px solid #6b6bee;
-    }
 
     .title-wrap {
       display: flex;

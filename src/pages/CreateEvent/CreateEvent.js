@@ -3,7 +3,7 @@ import { TextField, Box } from '@mui/material'
 import './createEvent.scss'
 import { useEffect, useState } from 'react'
 import client from '../../utils/client'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import dayjs from 'dayjs'
 import SlotPicker from '../../components/slotPicker/SlotPicker'
 import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers'
@@ -26,6 +26,7 @@ const initAlert = {
 const initSlot = { startTime: null, endTime: null, location: '' }
 
 export default function CreateEvent() {
+  const [pageAction, setPageAction] = useState('Host')
   const [inputs, setInputs] = useState(initInputs)
   const [slots, setSlots] = useState([initSlot])
   const [alert, setAlert] = useState(initAlert)
@@ -33,6 +34,43 @@ export default function CreateEvent() {
   const [needsPoster, setNeedsPoster] = useState(false)
   const [failErr, setFailErr] = useState('')
   const navigate = useNavigate()
+  const location = useLocation()
+  const params = useParams()
+
+  useEffect(() => {
+    if (location.pathname.includes('/events/edit')) {
+      setPageAction('Edit')
+
+      client
+        .get(`/events/${params.id}`)
+        .then((res) => {
+          const event = res.data.data.event
+
+          if (event.description) {
+            setNeedsDesc(true)
+          }
+          if (event.posterUrl) {
+            setNeedsPoster(true)
+          }
+
+          setInputs({
+            title: event.title,
+            description: event.description,
+            posterUrl: event.posterUrl,
+            deadline: event.invitation.expiresAt,
+          })
+          setSlots(event.slots)
+        })
+        .catch((res) => {
+          console.error(res)
+        })
+    }
+  }, [location, params])
+
+  useEffect(() => {
+    setAlert((a) => ({ ...a, slots: initAlert.slots }))
+    setFailErr('')
+  }, [slots])
 
   function handleInput(e) {
     const { name, value } = e.target
@@ -40,11 +78,6 @@ export default function CreateEvent() {
     setFailErr('')
     setInputs({ ...inputs, [name]: value })
   }
-
-  useEffect(() => {
-    setAlert({ ...alert, slots: initAlert.slots })
-    setFailErr('')
-  }, [slots])
 
   function getErrorStyle(target) {
     if (alert[target].status === 'error') {
@@ -78,18 +111,33 @@ export default function CreateEvent() {
     e.preventDefault()
 
     if (checkValidFields()) {
-      client
-        .post('/events', { ...inputs, slots })
-        .then((res) => {
-          navigate(`/events/${res.data.data.id}`)
-        })
-        .catch((res) => {
-          const message = res.response.data.message
-          if (res.response.data.message.includes('title')) {
-            setAlert({ title: { status: 'error' } })
-          }
-          setFailErr(message)
-        })
+      if (pageAction === 'Host') {
+        client
+          .post('/events', { ...inputs, slots })
+          .then((res) => {
+            navigate(`/events/${res.data.data.id}`)
+          })
+          .catch((res) => {
+            const message = res.response.data.message
+            if (res.response.data.message.includes('title')) {
+              setAlert({ title: { status: 'error' } })
+            }
+            setFailErr(message)
+          })
+      } else if (pageAction === 'Edit') {
+        client
+          .patch(`/events/${params.id}`, { ...inputs, slots })
+          .then((res) => {
+            navigate(`/events/${res.data.data.id}`)
+          })
+          .catch((res) => {
+            const message = res.response.data.message
+            if (res.response.data.message.includes('title')) {
+              setAlert({ title: { status: 'error' } })
+            }
+            setFailErr(message)
+          })
+      }
     }
   }
 
@@ -106,7 +154,7 @@ export default function CreateEvent() {
 
       <main>
         <div className='container'>
-          <h2>Host a New Event</h2>
+          <h2>{pageAction} a New Event</h2>
           <Box
             className='box'
             component='form'
@@ -216,9 +264,11 @@ export default function CreateEvent() {
             {failErr && <p id='fail-alert'>Failed: {failErr}</p>}
             <div className='btn-wrap'>
               <button className='submit-btn' type='submit'>
-                HOST
+                {pageAction.toUpperCase()}
               </button>
-              <button className='cancel-btn'>CANCEL</button>
+              <button className='cancel-btn' onClick={() => navigate('/dashboard')}>
+                CANCEL
+              </button>
             </div>
           </Box>
         </div>

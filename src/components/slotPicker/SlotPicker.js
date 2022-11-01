@@ -7,11 +7,30 @@ import { useEffect, useState } from 'react'
 
 export default function SlotPicker({ index, slot, slots, setSlots, deadline }) {
   const [needsLocation, setNeedsLocation] = useState(false)
-  const [slotInputs, setSlotInputs] = useState(slot)
+  const [slotInputs, setSlotInputs] = useState({})
+  const slotBeforeEdit = slot
+
+  useEffect(() => {
+    setSlotInputs({ startTime: slot.startTime, endTime: slot.endTime, location: slot.location })
+
+    if (slot.location) {
+      setNeedsLocation(true)
+    }
+  }, [slot])
 
   useEffect(() => {
     if (slots) {
-      if (slotInputs.startTime && slotInputs.endTime) {
+      if (
+        slotInputs.startTime === slotBeforeEdit.startTime &&
+        slotInputs.endTime === slotBeforeEdit.endTime &&
+        slotInputs.location === slotBeforeEdit.location
+      ) {
+        const newSlots = slots.map((s, i) => {
+          if (i === index) return slotBeforeEdit
+          return s
+        })
+        setSlots(newSlots)
+      } else if (slotInputs.startTime && slotInputs.endTime) {
         const newSlots = slots.map((s, i) => {
           if (i === index) return slotInputs
           return s

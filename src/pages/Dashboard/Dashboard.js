@@ -45,6 +45,11 @@ export default function Dashboard() {
     return undefined
   }
 
+  function handleDeleteEvent(id) {
+    const newArr = events.filter((e) => e.id !== id)
+    setEvents(newArr)
+  }
+
   let filteredEvents = events
 
   if (statusFilter === 'closed') {
@@ -156,7 +161,7 @@ export default function Dashboard() {
               <div className='event-list-wrap'>
                 <ul className='event-list'>
                   {filteredEvents.map((event, index) => (
-                    <EventItem key={index} event={event} />
+                    <EventItem key={index} event={event} handleDeleteEvent={handleDeleteEvent} />
                   ))}
                 </ul>
               </div>
