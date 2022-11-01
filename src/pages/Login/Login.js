@@ -57,7 +57,7 @@ export default function Login() {
           localStorage.setItem(tokenKey, token)
           userAction({ type: 'LOGIN', payload: data.user })
 
-          navigate('/dashboard')
+          navigate('/dashboard', { replace: true })
         })
         .catch((res) => {
           const data = res.response.data

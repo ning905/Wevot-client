@@ -54,7 +54,7 @@ export default function Verify() {
             {page.status === 'fail' && <p>{page.message}</p>}
 
             {page.status === 'success' && (
-              <Link to='/dashboard'>
+              <Link to='/dashboard' replace={true}>
                 <p>Click here to visit your personal page</p>
               </Link>
             )}

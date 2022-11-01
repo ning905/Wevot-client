@@ -144,6 +144,23 @@
         }
       }
 
+      .edit-event-btn {
+        background: #211c70;
+        border-radius: 33px;
+        border: none;
+        width: 11.5rem;
+        height: 3rem;
+        font-weight: 400;
+        font-size: 1.2rem;
+        letter-spacing: 0.1em;
+        color: #ffffff;
+        cursor: pointer;
+
+        &:hover {
+          background: #8e8edb;
+        }
+      }
+
       .invitation-wrap {
         color: #211c70;
         width: 50%;

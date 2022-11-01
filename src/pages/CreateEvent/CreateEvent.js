@@ -141,6 +141,14 @@ export default function CreateEvent() {
     }
   }
 
+  function handleCancel() {
+    if (location.pathname.includes('/events/edit') && location.state?.prePage === 'event') {
+      navigate(`/events/${params.id}`)
+    } else {
+      navigate('/dashboard')
+    }
+  }
+
   return (
     <div className='create-event'>
       <Navbar page='init' />
@@ -266,7 +274,7 @@ export default function CreateEvent() {
               <button className='submit-btn' type='submit'>
                 {pageAction.toUpperCase()}
               </button>
-              <button className='cancel-btn' onClick={() => navigate('/dashboard')}>
+              <button className='cancel-btn' onClick={handleCancel}>
                 CANCEL
               </button>
             </div>

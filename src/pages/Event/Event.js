@@ -156,21 +156,31 @@ export default function Event() {
             </div>
 
             {currentUser?.id === event?.hostId && (
-              <div className='invitation-wrap'>
-                <p>
-                  Share event code: <ClipboardCopy copyText={event.invitation.id} />
-                </p>
-                <p>
-                  Share via link:{' '}
-                  <ClipboardCopy
-                    copyText={
-                      process.env.REACT_APP_CLIENT_URL +
-                      '/events/participate/' +
-                      event.invitation.id
-                    }
-                  />
-                </p>
-              </div>
+              <>
+                <button
+                  className='edit-event-btn'
+                  onClick={() =>
+                    navigate(`/events/edit/${event.id}`, { state: { prePage: 'event' } })
+                  }
+                >
+                  Edit Event
+                </button>
+                <div className='invitation-wrap'>
+                  <p>
+                    Share event code: <ClipboardCopy copyText={event.invitation.id} />
+                  </p>
+                  <p>
+                    Share via link:{' '}
+                    <ClipboardCopy
+                      copyText={
+                        process.env.REACT_APP_CLIENT_URL +
+                        '/events/participate/' +
+                        event.invitation.id
+                      }
+                    />
+                  </p>
+                </div>
+              </>
             )}
 
             <div className='slots-wrap'>
