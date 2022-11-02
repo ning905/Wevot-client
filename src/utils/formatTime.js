@@ -15,7 +15,7 @@ export function eventPageFormatTime(time) {
 export function slotStartFormatTime(time) {
   const T = dayjs(new Date(time))
   if (T.get('year') === dayjs().year()) {
-    return T.format('DD MMM H:mm')
+    return T.format('DD MMM HH:mm')
   }
   return T.format('DD MMM YYYY HH:mm')
 }
