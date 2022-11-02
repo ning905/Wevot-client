@@ -64,7 +64,6 @@ export default function SlotItem({
     setOpenParList(true)
   }
 
-  console.log('openParList: ', openParList)
   return (
     <div className={className} onClick={!isParticipant && !expired ? handleSelect : undefined}>
       <div className='time-wrap'>
