@@ -27,6 +27,7 @@ export default function Login() {
     if (currentUser && localStorage.getItem(tokenKey)) {
       navigate('/dashboard')
     }
+    // eslint-disable-next-line
   }, [currentUser])
 
   function handleInput(e) {

@@ -50,7 +50,7 @@ export default function Event() {
       .catch((res) => {
         setAlert({ status: 'pageError', content: `Failed: ${res.response.data.message}` })
       })
-  }, [currentUser, location])
+  }, [currentUser, location, param])
 
   useEffect(() => {
     if (event) {
@@ -60,7 +60,7 @@ export default function Event() {
         setVotedSlots(foundParticipant.votedSlots)
       }
     }
-  }, [event])
+  }, [event, userInfo])
 
   function handleVote() {
     if (!votedSlots.length) {

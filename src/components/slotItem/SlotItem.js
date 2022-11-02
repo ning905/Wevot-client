@@ -1,6 +1,9 @@
-import { Avatar, AvatarGroup } from '@mui/material'
+import { Avatar, AvatarGroup, Popover } from '@mui/material'
+import { useState } from 'react'
 import { initVoteAlert } from '../../pages/Event/Event'
 import { slotEndFormatTime, slotStartFormatTime } from '../../utils/formatTime'
+import SlotParInfo from '../slotParInfo/SlotParInfo'
+import SlotParList from '../slotParList/SlotParList'
 import './slotItem.scss'
 
 export default function SlotItem({
@@ -11,6 +14,11 @@ export default function SlotItem({
   isParticipant,
   expired,
 }) {
+  const [anchorEl, setAnchorEl] = useState(null)
+  const [targetPar, setTargetPar] = useState(null)
+  const [openParList, setOpenParList] = useState(false)
+  const openPop = Boolean(anchorEl)
+
   let className = 'slot-item'
   const selected = votedSlots.find((s) => s.id === slot.id)
   if (selected) {
@@ -43,6 +51,20 @@ export default function SlotItem({
     }
   }
 
+  function handlePopoverOpen(event, par) {
+    setAnchorEl(event.currentTarget)
+    setTargetPar(par)
+  }
+
+  function handlePopoverClose() {
+    setAnchorEl(null)
+  }
+
+  function handleClickOpenParList() {
+    setOpenParList(true)
+  }
+
+  console.log('openParList: ', openParList)
   return (
     <div className={className} onClick={!isParticipant && !expired ? handleSelect : undefined}>
       <div className='time-wrap'>
@@ -52,11 +74,55 @@ export default function SlotItem({
       <div className='location-wrap'>{slot.location}</div>
 
       <div className='votes-wrap'>
-        <AvatarGroup max={4}>
+        <AvatarGroup max={4} onClick={handleClickOpenParList}>
           {slot.participants.map((par, index) => (
-            <Avatar key={index} alt={par.email} src={getAvatar(par.name, par.email)} />
+            <div key={index}>
+              <Avatar
+                alt={par.email}
+                src={getAvatar(par.name, par.email)}
+                aria-owns={openPop ? 'mouse-over-popover' : undefined}
+                aria-haspopup='true'
+                onMouseEnter={(event) => {
+                  handlePopoverOpen(event, par)
+                }}
+                onMouseLeave={handlePopoverClose}
+              />
+              <Popover
+                id='mouse-over-popover'
+                sx={{
+                  pointerEvents: 'none',
+                }}
+                open={openPop}
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'left',
+                }}
+                transformOrigin={{
+                  vertical: 75,
+                  horizontal: 'left',
+                }}
+                PaperProps={{
+                  sx: {
+                    borderRadius: '25px',
+                    boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.25)',
+                    width: 'fit-content',
+                  },
+                }}
+                onClose={handlePopoverClose}
+                disableRestoreFocus
+              >
+                <SlotParInfo par={targetPar} getAvatar={getAvatar} />
+              </Popover>
+            </div>
           ))}
         </AvatarGroup>
+        <SlotParList
+          open={openParList}
+          setOpen={setOpenParList}
+          pars={slot.participants}
+          getAvatar={getAvatar}
+        />
       </div>
     </div>
   )
