@@ -38,7 +38,7 @@ export default function SlotPicker({ index, slot, slots, setSlots, deadline }) {
         setSlots(newSlots)
       }
     }
-  }, [index, setSlots, slotBeforeEdit, slotInputs, slots])
+  }, [index, slotInputs])
 
   return (
     <div className='slot-picker'>
