@@ -73,7 +73,7 @@ export default function SlotItem({
       <div className='location-wrap'>{slot.location}</div>
 
       <div className='votes-wrap'>
-        <AvatarGroup max={4} onClick={handleClickOpenParList}>
+        <AvatarGroup max={4} sx={{ width: 'fit-content' }} onClick={handleClickOpenParList}>
           {slot.participants.map((par, index) => (
             <div key={index}>
               <Avatar

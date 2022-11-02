@@ -31,4 +31,9 @@
     align-items: center;
     color: #38374d;
   }
+
+  .votes-wrap {
+    display: flex;
+    justify-content: flex-end;
+  }
 }
