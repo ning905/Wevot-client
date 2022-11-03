@@ -1,5 +1,5 @@
 import axios from 'axios'
-const host = process.env.REACT_APP_API_URL
+const host = process.env.REACT_APP_CLIENT_URL + '/api'
 const tokenKey = process.env.REACT_APP_USER_TOKEN
 
 const client = {
