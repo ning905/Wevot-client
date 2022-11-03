@@ -36,7 +36,7 @@ export default function Signup() {
     if (currentUser) {
       navigate('/dashboard')
     }
-  }, [currentUser])
+  }, [currentUser, navigate])
 
   function handleInput(e) {
     const { name, value } = e.target

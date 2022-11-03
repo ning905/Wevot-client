@@ -25,19 +25,22 @@ export default function SlotPicker({ index, slot, slots, setSlots, deadline }) {
         slotInputs.endTime === slotBeforeEdit.endTime &&
         slotInputs.location === slotBeforeEdit.location
       ) {
-        const newSlots = slots.map((s, i) => {
-          if (i === index) return slotBeforeEdit
-          return s
-        })
-        setSlots(newSlots)
+        setSlots((pre) =>
+          pre.map((s, i) => {
+            if (i === index) return slotBeforeEdit
+            return s
+          })
+        )
       } else if (slotInputs.startTime && slotInputs.endTime) {
-        const newSlots = slots.map((s, i) => {
-          if (i === index) return slotInputs
-          return s
-        })
-        setSlots(newSlots)
+        setSlots((pre) =>
+          pre.map((s, i) => {
+            if (i === index) return slotInputs
+            return s
+          })
+        )
       }
     }
+    // eslint-disable-next-line
   }, [index, slotInputs])
 
   return (
