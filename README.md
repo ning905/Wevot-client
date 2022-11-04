@@ -2,9 +2,9 @@
 
 This app is deployed at [https://wevot.netlify.app/](https://wevot.netlify.app/)
 
-An event scheduling app for people who want to meet up but find it hard deciding a time that suits the most participants.
+An event scheduling app for people who want to meet up but find it hard to decide a time that suits the most participants.
 
-A user can create an event with multiple potential time slots and invite their fiends to vote on their preferred slot.
+Users can create an event with multiple potential time slots and invite their friends to vote on their preferred slots.
 
 ## Table of contents
 
