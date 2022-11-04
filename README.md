@@ -1,70 +1,52 @@
-# Getting Started with Create React App
+# WeVot
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+An event scheduling app for people who want to meet up but find it hard deciding a time that suits the most participants.
 
-## Available Scripts
+A user can create an event with multiple potential time slots and invite their fiends to vote on their preferred slot.
 
-In the project directory, you can run:
+## Table of contents
 
-### `npm start`
+- [WeVot](#wevot)
+  - [Table of contents](#table-of-contents)
+  - [General info](#general-info)
+  - [Technologies](#technologies)
+  - [Run this project locally](#run-this-project-locally)
+  - [How to use the app](#how-to-use-the-app)
+    - [To host an event](#to-host-an-event)
+    - [To join an event](#to-join-an-event)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## General info
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+This is the client repository for WeVot app. You can find the [server repository](https://github.com/ning905/Wevot-server) here.
 
-### `npm test`
+This project is built for the Boolean Course as the final personal project.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Technologies
 
-### `npm run build`
+Project is created with:
+React, JavaScript, Scss, Material UI, Axios
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Run this project locally
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Fork this repository and clone the fork to your machine.
+2. `npm install`
+3. `npm start`
+4. Fork the [server repository](https://github.com/ning905/Wevot-server) and follow the instructions.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## How to use the app
 
-### `npm run eject`
+### To host an event
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+![home-page](readmeImg/home.png)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. If you already have an account, simply log in your account, and skip step 2 and 3.
+2. Sign up to create an account. </br>You will receive a verification email after your account is created. </br>Your account must be verified before you can login in.
+3. Click the link in the email and verify your account. Once it is verified successfully, you will be able to view your dashboard.
+4. Click the "HOST AN EVENT" button and create your event with details. Feel free to add more time slots if needed. You can also choose to provide location information for your slots. ![create-an-event](readmeImg/create-an-event.png)
+5. After the event has been created, you can share the event with your friends either via link or event code.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### To join an event
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. To join by link, simply paste the link you received to your browser. </br>To join by event code, visit the website and click the "JOIN AN EVENT" button on the home page or navigation bar. Paste the event code into the input field.
+2. Enter your email address so we can recognize your vote and notify you if the host updates the event. You can choose to leave your name so other participants may recognize you.
+3. Select your preferred slots and click submit. You can withdraw and submit new ones before the voting deadline.
