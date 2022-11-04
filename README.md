@@ -1,6 +1,7 @@
 # WeVot
 
 This app is deployed at [https://wevot.netlify.app/](https://wevot.netlify.app/)
+
 An event scheduling app for people who want to meet up but find it hard deciding a time that suits the most participants.
 
 A user can create an event with multiple potential time slots and invite their fiends to vote on their preferred slot.
@@ -36,15 +37,17 @@ React, JavaScript, Scss, Material UI, Axios
 
 ## How to use the app
 
-### To host an event
-
 ![home-page](readmeImg/home.png)
+
+### To host an event
 
 1. If you already have an account, simply log in your account, and skip step 2 and 3.
 2. Sign up to create an account. </br>You will receive a verification email after your account is created. </br>Your account must be verified before you can login in.
 3. Click the link in the email and verify your account. Once it is verified successfully, you will be able to view your dashboard.
-4. Click the "HOST AN EVENT" button and create your event with details. Feel free to add more time slots if needed. You can also choose to provide location information for your slots. ![create-an-event](readmeImg/create-an-event.png)
+4. Click the "HOST AN EVENT" button and create your event with details. Feel free to add more time slots if needed. You can also choose to provide location information for your slots.
+   ![create-an-event](readmeImg/create-an-event.png)
 5. After the event has been created, you can share the event with your friends either via link or event code.
+   ![event-page](readmeImg/event-page.png)
 
 ### To join an event
 
