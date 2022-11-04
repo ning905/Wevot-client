@@ -26,6 +26,7 @@ This project is built for the Boolean Course as the final personal project.
 ## Technologies
 
 Project is created with:
+
 React, JavaScript, Scss, Material UI, Axios
 
 ## Run this project locally
