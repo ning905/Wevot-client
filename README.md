@@ -38,9 +38,9 @@ React, JavaScript, Scss, Material UI, Axios
 
 ## How to use the app
 
-### To host an event
-
 ![home-page](readmeImg/home.png)
+
+### To host an event
 
 1. If you already have an account, simply log in your account, and skip step 2 and 3.
 2. Sign up to create an account. </br>You will receive a verification email after your account is created. </br>Your account must be verified before you can login in.
