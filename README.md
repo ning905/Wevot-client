@@ -45,6 +45,7 @@ React, JavaScript, Scss, Material UI, Axios
 1. If you already have an account, simply log in your account, and skip step 2 and 3.
 2. Sign up to create an account. </br>You will receive a verification email after your account is created. </br>Your account must be verified before you can login in.
 3. Click the link in the email and verify your account. Once it is verified successfully, you will be able to view your dashboard.
+   ![dashboard](readmeImg/dashboard.png)
 4. Click the "HOST AN EVENT" button and create your event with details. Feel free to add more time slots if needed. You can also choose to provide location information for your slots.
    ![create-an-event](readmeImg/create-an-event.png)
 5. After the event has been created, you can share the event with your friends either via link or event code.
