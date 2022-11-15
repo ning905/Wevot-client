@@ -23,15 +23,18 @@ export const UserContextProvider = ({ children }) => {
         .catch((err) => {
           localStorage.removeItem(tokenKey)
           console.error(err)
+          dispatch({ type: 'LOGOUT' })
         })
     }
   }, [])
 
+  console.log('user context: ', state)
+
   return (
-    (!token || state.user) && (
-      <UserContext.Provider value={{ currentUser: state.user, userAction: dispatch }}>
-        {children}
-      </UserContext.Provider>
-    )
+    // (!token || state.user) && (
+    <UserContext.Provider value={{ currentUser: state.user, userAction: dispatch }}>
+      {children}
+    </UserContext.Provider>
+    // )
   )
 }

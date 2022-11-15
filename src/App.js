@@ -1,5 +1,4 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
-import './app.scss'
 import Home from './pages/Home/Home'
 import Login from './pages/Login/Login'
 import CheckEmail from './pages/Signup/CheckEmail'
@@ -10,6 +9,7 @@ import CreateEvent from './pages/CreateEvent/CreateEvent'
 import Event from './pages/Event/Event'
 import { useContext } from 'react'
 import { UserContext } from './context/UserContext'
+import './app.scss'
 
 function App() {
   const { currentUser } = useContext(UserContext)

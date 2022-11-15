@@ -1,4 +1,6 @@
 .home {
+  min-height: 100vh;
+  position: relative;
   background: radial-gradient(
         44.93% 27.95% at 70.49% 48.79%,
         rgba(227, 119, 159, 0.536) 0%,
@@ -46,7 +48,7 @@
       .bottom {
         display: flex;
         width: 100%;
-        gap: 15px;
+        gap: 1rem;
 
         .text-wrap {
           flex: 5;
@@ -57,29 +59,29 @@
 
           h2 {
             font-weight: 700;
-            font-size: 70px;
+            font-size: 4.3rem;
             color: #211c70;
             line-height: 100%;
           }
 
           p {
             font-weight: 400;
-            font-size: 18px;
+            font-size: 1.2rem;
             color: #6b67aa;
             line-height: 153%;
-            margin: 15px 90px 45px 0;
+            margin: 1rem 5.6rem 1rem 0;
           }
 
           button {
-            width: 270px;
-            height: 50px;
+            width: 16.8rem;
+            height: 3.125rem;
             border: none;
             background: #8e8edb;
             border-radius: 33px;
             cursor: pointer;
 
             font-weight: 600;
-            font-size: 20px;
+            font-size: 1.25rem;
             letter-spacing: 0.1em;
             color: #ffffff;
 
@@ -92,7 +94,7 @@
 
         .img-wrap {
           flex: 7;
-          height: 590px;
+          // height: 36.875rem;
           display: grid;
           place-items: center;
 
@@ -107,6 +109,8 @@
 
   footer {
     hr {
+      position: absolute;
+      bottom: 0;
       width: 100vw;
       height: 10px;
       background: linear-gradient(
@@ -117,6 +121,95 @@
         #ffc397 84.72%
       );
       border-radius: 8px;
+    }
+  }
+
+  @media screen and (max-width: 992px) {
+    main {
+      .container {
+        width: 85%;
+
+        .top,
+        .bottom {
+          .text-wrap {
+            h2 {
+              font-size: 3.5rem;
+            }
+
+            p {
+              font-size: 1rem;
+              margin: 1rem 1rem 1rem 0;
+            }
+
+            button {
+              width: 15rem;
+              height: 3.125rem;
+
+              font-size: 1rem;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    main {
+      .container {
+        width: 90%;
+
+        .top,
+        .bottom {
+          .text-wrap {
+            h2 {
+              font-size: 2.5rem;
+            }
+
+            button {
+              width: 12rem;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    main {
+      .container {
+        padding: 50px 0;
+        gap: 5rem;
+
+        .top,
+        .bottom {
+          flex-direction: column;
+
+          .text-wrap {
+            h2 {
+              font-size: 2rem;
+            }
+
+            p {
+              margin: 1rem 2rem 1rem 0;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 320px) {
+    main {
+      .container {
+        .top,
+        .bottom {
+          .text-wrap {
+            h2 {
+              font-size: 3rem;
+            }
+          }
+        }
+      }
     }
   }
 }

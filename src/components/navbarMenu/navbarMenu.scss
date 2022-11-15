@@ -1,0 +1,45 @@
+.navbar-menu {
+  position: absolute;
+  width: 30vw;
+  top: 71px;
+  right: 37.5px;
+
+  .menu-item {
+    height: 70px;
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: white;
+    background: rgba(142, 142, 219, 0.9);
+    display: flex;
+    align-items: center;
+    padding-left: 50px;
+    border-bottom: 1px solid white;
+
+    &.sm-screen {
+      display: none;
+    }
+
+    &:active {
+      background: #211c70;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    right: 0;
+
+    .menu-item {
+      padding-left: 30px;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    width: 100vw;
+    .menu-item {
+      padding-left: 50px;
+
+      &.sm-screen {
+        display: flex;
+      }
+    }
+  }
+}
