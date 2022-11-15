@@ -11,7 +11,7 @@ export default function SearchBar({ query, setQuery }) {
       <FormControl
         sx={{
           height: '3.25rem',
-          width: '60%',
+          width: '100%',
           backgroundColor: 'rgba(255, 255, 255, 0.4)',
           borderRadius: '15px',
         }}

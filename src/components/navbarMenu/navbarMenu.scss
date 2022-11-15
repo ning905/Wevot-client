@@ -3,6 +3,7 @@
   width: 30vw;
   top: 71px;
   right: 37.5px;
+  z-index: 2;
 
   .menu-item {
     height: 70px;
@@ -14,6 +15,7 @@
     align-items: center;
     padding-left: 50px;
     border-bottom: 1px solid white;
+    letter-spacing: 0.05rem;
 
     &.sm-screen {
       display: none;
@@ -28,6 +30,7 @@
     right: 0;
 
     .menu-item {
+      height: 60px;
       padding-left: 30px;
     }
   }

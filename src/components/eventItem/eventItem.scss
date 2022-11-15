@@ -16,15 +16,15 @@
     height: 100%;
     display: grid;
     grid-auto-flow: column;
-    grid-template-columns: 2fr 0.5fr 1fr;
+    grid-template-columns: 1fr 0.5fr 1fr;
     align-items: center;
     gap: 3rem;
-    padding: 0 1.4rem;
+    padding: 0 1rem;
     cursor: pointer;
 
     .title-wrap {
       display: flex;
-      gap: 1.4rem;
+      gap: 1rem;
       align-items: center;
 
       img {
@@ -35,7 +35,7 @@
 
       h3 {
         font-weight: 500;
-        font-size: 20px;
+        font-size: 1.25rem;
       }
     }
 
@@ -78,6 +78,40 @@
 
       .voted-slots {
         padding-left: 0.2rem;
+      }
+    }
+  }
+
+  @media screen and (max-width: 720px) {
+    height: 80px;
+
+    .wrap {
+      grid-template-columns: 2fr 1fr;
+
+      .status-wrap {
+        display: none;
+      }
+
+      .slots-wrap {
+        padding: 0;
+      }
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .wrap {
+      grid-template-columns: 1fr;
+
+      .title-wrap {
+        gap: 0.5rem;
+
+        h3 {
+          font-size: 1rem;
+        }
+      }
+
+      .slots-wrap {
+        display: none;
       }
     }
   }

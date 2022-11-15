@@ -4,6 +4,7 @@ import AvatarForm from '../../components/avatarForm/AvatarForm'
 import EventItem from '../../components/eventItem/EventItem'
 import Navbar from '../../components/navbar/Navbar'
 import SearchBar from '../../components/searchBar/SearchBar'
+import MenuIcon from '@mui/icons-material/Menu'
 import {
   LinkOutlined,
   MailOutline,
@@ -14,6 +15,8 @@ import {
 import { UserContext } from '../../context/UserContext'
 import client from '../../utils/client'
 import './dashboard.scss'
+import DashboardMenu from '../../components/dashboardMenu/DashboardMenu'
+import { ClickAwayListener } from '@mui/material'
 
 export default function Dashboard() {
   const [events, setEvents] = useState([])
@@ -21,6 +24,7 @@ export default function Dashboard() {
   const [menuFilter, setMenuFilter] = useState('')
   const [statusFilter, setStatusFilter] = useState('')
   const [openDialog, setOpenDialog] = useState(false)
+  const [openMenu, setOpenMenu] = useState(false)
   const { currentUser } = useContext(UserContext)
 
   useEffect(() => {
@@ -33,6 +37,10 @@ export default function Dashboard() {
         console.error(res)
       })
   }, [currentUser])
+
+  function toggleOpenMenu() {
+    setOpenMenu((pre) => !pre)
+  }
 
   function handleClickOpenDialog() {
     setOpenDialog(true)
@@ -93,11 +101,13 @@ export default function Dashboard() {
                 </div>
               </div>
 
-              <h2>{currentUser.username}</h2>
-              <p>
-                <MailOutline fontSize='1rem' />
-                {currentUser.email}
-              </p>
+              <div className='info-wrap'>
+                <h2>{currentUser.username}</h2>
+                <p>
+                  <MailOutline fontSize='1rem' />
+                  {currentUser.email}
+                </p>
+              </div>
             </div>
             <AvatarForm open={openDialog} setOpen={setOpenDialog} />
 
@@ -134,9 +144,35 @@ export default function Dashboard() {
           </div>
 
           <div className='right'>
-            <SearchBar query={query} setQuery={setQuery} />
+            <div className='searchbar-wrap'>
+              <SearchBar query={query} setQuery={setQuery} />
+            </div>
             <section className='event-list-section'>
-              <h2>My Events</h2>
+              <div className='sm-menu-wrap'>
+                <ClickAwayListener onClickAway={() => setOpenMenu(false)}>
+                  <div className='menu-container'>
+                    <MenuIcon
+                      className={openMenu ? 'menu-icon menu-open' : 'menu-icon'}
+                      fontSize='large'
+                      onClick={toggleOpenMenu}
+                    />
+
+                    <DashboardMenu
+                      openMenu={openMenu}
+                      setOpenMenu={setOpenMenu}
+                      menuFilter={menuFilter}
+                      setMenuFilter={setMenuFilter}
+                      getFilterClassName={getFilterClassName}
+                    />
+                  </div>
+                </ClickAwayListener>
+
+                <h2>
+                  {menuFilter
+                    ? menuFilter.slice(0, 1).toUpperCase() + menuFilter.slice(1)
+                    : 'All Events'}
+                </h2>
+              </div>
               <div className='filters'>
                 <p
                   className={getFilterClassName(statusFilter, '')}

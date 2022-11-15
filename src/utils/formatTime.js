@@ -1,7 +1,11 @@
 import dayjs from 'dayjs'
 
 export function eventItemFormatTime(time) {
-  return dayjs(new Date(time)).format('DD MMM YYYY')
+  const T = dayjs(new Date(time))
+  if (T.get('year') === dayjs().year()) {
+    return T.format('DD MMM')
+  }
+  return T.format('DD MMM YYYY')
 }
 
 export function eventPageFormatTime(time) {

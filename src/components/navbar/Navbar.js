@@ -5,9 +5,10 @@ import { UserContext } from '../../context/UserContext'
 import JoinForm from '../joinForm/JoinForm'
 import './navbar.scss'
 import NavbarMenu from '../navbarMenu/NavbarMenu'
+import { ClickAwayListener } from '@mui/material'
 
 export default function Navbar({ page }) {
-  const [open, setOpen] = useState(false)
+  const [openJoin, setOpenJoin] = useState(false)
   const [openMenu, setOpenMenu] = useState(false)
   const { currentUser, userAction } = useContext(UserContext)
   const navigate = useNavigate()
@@ -21,8 +22,8 @@ export default function Navbar({ page }) {
     return currentUser ? navigate('/events/create') : navigate('/login')
   }
 
-  function handleClickOpen() {
-    setOpen(true)
+  function handleClickOpenJoin() {
+    setOpenJoin(true)
   }
 
   function handleLogout() {
@@ -48,7 +49,7 @@ export default function Navbar({ page }) {
           <div className='right'>
             {page === 'init' && (
               <>
-                <span className='dark-text clickable w_70' onClick={handleClickOpen}>
+                <span className='dark-text clickable w_70' onClick={handleClickOpenJoin}>
                   JOIN
                 </span>
                 <span className='dark-text clickable w_70' onClick={handleHost}>
@@ -59,33 +60,53 @@ export default function Navbar({ page }) {
                     <Link to='/dashboard' className='link'>
                       <button className='dark-text bold-text dark-btn '>Dashboard</button>
                     </Link>
+
                     <button className='bold-text light-btn right-btn' onClick={handleLogout}>
                       Log Out
                     </button>
-                    <div className={openMenu ? 'menu-wrap menu-open' : 'menu-wrap'}>
-                      <img
-                        src={currentUser.profileImgUrl}
-                        alt='avatar'
-                        className='avatar'
+
+                    <ClickAwayListener onClickAway={() => setOpenMenu(false)}>
+                      <div
+                        className={openMenu ? 'menu-wrap menu-open' : 'menu-wrap'}
                         onClick={toggleOpenMenu}
-                      />
-                    </div>
+                      >
+                        <img src={currentUser.profileImgUrl} alt='avatar' className='avatar' />
+                        <NavbarMenu
+                          openMenu={openMenu}
+                          setOpenMenu={setOpenMenu}
+                          handleLogout={handleLogout}
+                          handleClickOpenJoin={handleClickOpenJoin}
+                          handleHost={handleHost}
+                        />
+                      </div>
+                    </ClickAwayListener>
                   </>
                 ) : (
                   <>
                     <Link to='/login' className='link'>
                       <button className='dark-text bold-text light-btn'>Log In</button>
                     </Link>
+
                     <Link to='/signup' className='link'>
                       <button className='bold-text dark-btn right-btn'>Sign Up</button>
                     </Link>
-                    <div className={openMenu ? 'menu-wrap menu-open' : 'menu-wrap'}>
-                      <MenuIcon
-                        onClick={toggleOpenMenu}
-                        fontSize='large'
-                        style={{ color: '#16dcf4' }}
-                      />
-                    </div>
+
+                    <ClickAwayListener onClickAway={() => setOpenMenu(false)}>
+                      <div className={openMenu ? 'menu-wrap menu-open' : 'menu-wrap'}>
+                        <MenuIcon
+                          onClick={toggleOpenMenu}
+                          fontSize='large'
+                          style={{ color: '#16dcf4' }}
+                        />
+                        <NavbarMenu
+                          openMenu={openMenu}
+                          setOpenMenu={setOpenMenu}
+                          handleLogout={handleLogout}
+                          handleClickOpenJoin={handleClickOpenJoin}
+                          handleHost={handleHost}
+                        />
+                      </div>
+                    </ClickAwayListener>
                   </>
                 )}
               </>
@@ -108,15 +129,8 @@ export default function Navbar({ page }) {
             )}
           </div>
         </div>
-        <div className='bottom' style={{ display: openMenu ? 'block' : 'none' }}>
-          <NavbarMenu
-            handleLogout={handleLogout}
-            handleClickOpen={handleClickOpen}
-            handleHost={handleHost}
-          />
-        </div>
       </div>
-      <JoinForm open={open} setOpen={setOpen} />
+      <JoinForm open={openJoin} setOpen={setOpenJoin} />
     </div>
   )
 }
