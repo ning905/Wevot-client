@@ -5,8 +5,8 @@
   height: 4.4rem;
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
+  gap: 1rem;
   align-items: center;
-  // justify-content: space-between;
   padding: 0 1.2rem;
 
   &.selectable {
@@ -35,5 +35,31 @@
   .votes-wrap {
     display: flex;
     justify-content: flex-end;
+  }
+
+  @media screen and (max-width: 768px) {
+    padding: 0 1rem;
+
+    .time-wrap,
+    .location-wrap {
+      font-size: 1rem;
+    }
+
+    .votes-wrap {
+      .avatar {
+        width: 30px;
+        height: 30px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .time-wrap,
+    .location-wrap {
+      font-size: 0.9rem;
+    }
+  }
+
+  @media screen and (max-width: 320px) {
   }
 }

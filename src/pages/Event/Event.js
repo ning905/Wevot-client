@@ -166,11 +166,13 @@ export default function Event() {
                   Edit Event
                 </button>
                 <div className='invitation-wrap'>
-                  <p>
-                    Share event code: <ClipboardCopy copyText={event.invitation.id} />
-                  </p>
-                  <p>
-                    Share via link:{' '}
+                  <div className='invitation'>
+                    <p>Share event code:</p>
+                    <ClipboardCopy copyText={event.invitation.id} />
+                  </div>
+
+                  <div className='invitation'>
+                    <p>Share via link:</p>
                     <ClipboardCopy
                       copyText={
                         process.env.REACT_APP_CLIENT_URL +
@@ -178,7 +180,7 @@ export default function Event() {
                         event.invitation.id
                       }
                     />
-                  </p>
+                  </div>
                 </div>
               </>
             )}

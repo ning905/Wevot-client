@@ -52,8 +52,10 @@ export default function SlotItem({
   }
 
   function handlePopoverOpen(event, par) {
-    setAnchorEl(event.currentTarget)
-    setTargetPar(par)
+    if (window.innerWidth >= 1024) {
+      setAnchorEl(event.currentTarget)
+      setTargetPar(par)
+    }
   }
 
   function handlePopoverClose() {
@@ -77,6 +79,7 @@ export default function SlotItem({
           {slot.participants.map((par, index) => (
             <div key={index}>
               <Avatar
+                className='avatar'
                 alt={par.email}
                 src={getAvatar(par.name, par.email)}
                 aria-owns={openPop ? 'mouse-over-popover' : undefined}
@@ -87,6 +90,7 @@ export default function SlotItem({
                 onMouseLeave={handlePopoverClose}
               />
               <Popover
+                className='popover'
                 id='mouse-over-popover'
                 sx={{
                   pointerEvents: 'none',
@@ -111,7 +115,7 @@ export default function SlotItem({
                 onClose={handlePopoverClose}
                 disableRestoreFocus
               >
-                <SlotParInfo par={targetPar} getAvatar={getAvatar} />
+                <SlotParInfo className='popover' par={targetPar} getAvatar={getAvatar} />
               </Popover>
             </div>
           ))}

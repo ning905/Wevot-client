@@ -41,4 +41,20 @@
       }
     }
   }
+
+  @media screen and (max-width: 768px) {
+    .text-wrap {
+      h2 {
+        padding: 3rem 4rem 1rem 4rem;
+      }
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .text-wrap {
+      h2 {
+        padding: 3rem 3rem 0 3rem;
+      }
+    }
+  }
 }
