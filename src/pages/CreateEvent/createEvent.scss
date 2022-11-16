@@ -38,15 +38,14 @@
     color: #16dcf4;
     margin-top: 2rem;
     width: 100%;
+    max-width: 1640px;
     display: flex;
-    justify-content: center;
+    justify-content: left;
 
     .go-back {
       display: flex;
       align-items: center;
-      margin: 0 100px;
-      width: 100%;
-      max-width: 1440px;
+      margin-left: 87.5px;
 
       &:hover {
         color: #8e8edb;
@@ -62,6 +61,7 @@
   main {
     max-width: 1440px;
     width: 70%;
+    min-width: 800px;
     margin: 3rem 0;
     background: linear-gradient(0deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
       radial-gradient(
@@ -119,14 +119,17 @@
           display: flex;
           padding: 0 2rem;
           align-items: center;
+          width: 100%;
           justify-content: space-between;
 
           .left {
             color: #4b4b4b;
+            flex: 1;
           }
 
           .right {
-            width: 80%;
+            // width: 70%;
+            flex: 4;
           }
         }
 
@@ -142,7 +145,8 @@
           justify-content: space-around;
 
           button {
-            width: 21.5rem;
+            max-width: 20rem;
+            width: 45%;
             height: 3rem;
             border-radius: 33px;
             font-size: 1.25rem;
@@ -178,6 +182,186 @@
             font-size: 1.2rem;
             font-weight: 500;
             color: #e15838;
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 992px) {
+    .go-back-wrap {
+      .go-back {
+        margin-left: 37.5px;
+      }
+    }
+
+    main {
+      width: 80%;
+      min-width: 700px;
+
+      .container {
+        padding: 2rem 2rem;
+
+        h2 {
+          font-size: 1.8rem;
+        }
+
+        .box {
+          .input-wrap {
+            padding: 0 1rem;
+
+            .right {
+              flex: 3;
+
+              &.input-field,
+              &.deadline-picker {
+                input {
+                  width: 25.75rem;
+                }
+
+                fieldset {
+                  width: 27.5rem;
+                }
+              }
+            }
+          }
+
+          .click-to-add {
+            padding-left: 1rem;
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    main {
+      min-width: 550px;
+
+      .container {
+        padding: 1.25rem 2rem;
+
+        h2 {
+          font-size: 1.5rem;
+        }
+
+        .box {
+          .input-wrap {
+            .right {
+              flex: 2;
+
+              &.input-field,
+              &.deadline-picker {
+                input {
+                  width: 17.75rem;
+                }
+
+                fieldset {
+                  width: 19.5rem;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .go-back-wrap {
+      .go-back {
+        margin: 0;
+      }
+    }
+
+    main {
+      width: 95%;
+      min-width: 300px;
+      margin: 2rem 0;
+
+      .container {
+        padding: 1.2rem;
+
+        h2 {
+          font-size: 1.3rem;
+        }
+
+        .box {
+          .input-wrap {
+            .right {
+              flex: 3;
+
+              &.input-field,
+              &.deadline-picker {
+                input {
+                  width: 16.25rem;
+                }
+
+                fieldset {
+                  width: 18rem;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .go-back-wrap {
+      margin-top: 1rem;
+    }
+
+    main {
+      margin: 1rem 0;
+
+      .container {
+        padding: 1rem;
+
+        .box {
+          .click-to-add {
+            padding-left: 0;
+          }
+
+          .input-wrap {
+            padding: 0;
+            flex-direction: column;
+            gap: 0.5rem;
+
+            .left {
+              align-self: flex-start;
+            }
+
+            .right {
+              flex: 3;
+
+              &.input-field,
+              &.deadline-picker {
+                width: 100%;
+
+                input {
+                  width: 100%;
+                  padding: 0.5rem;
+                }
+
+                fieldset {
+                  width: 100%;
+                }
+              }
+            }
+          }
+
+          .btn-wrap {
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+
+            button {
+              font-size: 1.1rem;
+              height: 2.5rem;
+              width: 80%;
+            }
           }
         }
       }

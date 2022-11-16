@@ -45,7 +45,7 @@ export default function SlotPicker({ index, slot, slots, setSlots, deadline }) {
 
   return (
     <div className='slot-picker'>
-      <LocalizationProvider dateAdapter={AdapterDayjs} className='time-picker'>
+      <LocalizationProvider dateAdapter={AdapterDayjs} className='time-picker left'>
         <DateTimePicker
           disablePast
           minDateTime={dayjs(deadline)}
@@ -61,7 +61,7 @@ export default function SlotPicker({ index, slot, slots, setSlots, deadline }) {
 
       <p>to</p>
 
-      <LocalizationProvider dateAdapter={AdapterDayjs} className='time-picker'>
+      <LocalizationProvider dateAdapter={AdapterDayjs} className='time-picker right'>
         <DateTimePicker
           disablePast
           minDateTime={dayjs(slotInputs.startTime)}
@@ -77,7 +77,7 @@ export default function SlotPicker({ index, slot, slots, setSlots, deadline }) {
 
       {needsLocation ? (
         <TextField
-          className='input-field'
+          className='location-input'
           variant='outlined'
           label='LOCATION'
           placeholder='Add location'

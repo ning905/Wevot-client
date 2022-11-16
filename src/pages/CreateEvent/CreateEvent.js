@@ -153,8 +153,8 @@ export default function CreateEvent() {
     <div className='create-event'>
       <Navbar page='init' />
 
-      <div className='go-back-wrap' onClick={() => navigate('/dashboard')}>
-        <p className='go-back'>
+      <div className='go-back-wrap'>
+        <p className='go-back' onClick={() => navigate('/dashboard')}>
           <ArrowBackIosOutlined className='icon' />
           Back to dashboard
         </p>
@@ -232,7 +232,7 @@ export default function CreateEvent() {
               </p>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DateTimePicker
-                  className='right'
+                  className='right deadline-picker'
                   disablePast
                   renderInput={(props) => <TextField {...props} />}
                   name='startTime'
