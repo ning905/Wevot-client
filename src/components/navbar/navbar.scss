@@ -113,8 +113,16 @@
       margin: 0;
 
       .top {
-        margin: 0 37.5px 0 50px;
+        margin: 0 37.5px 0 37.5px;
+
+        .left {
+          margin-left: 12.5px;
+        }
+
         .right {
+          .account-text-wrap {
+            margin-right: 12.5px;
+          }
           button {
             display: none;
           }
@@ -153,7 +161,7 @@
   @media screen and (max-width: 768px) {
     .wrap {
       .top {
-        margin: 0 0 0 12.5px;
+        margin: 0;
       }
     }
   }
@@ -163,6 +171,7 @@
       .top {
         .right {
           span {
+            &.grey-text,
             &.w_70 {
               display: none;
             }

@@ -117,20 +117,20 @@ export default function Navbar({ page }) {
               </>
             )}
             {page === 'login' && (
-              <>
+              <div className='account-text-wrap'>
                 <span className='grey-text default-cursor'>Not a member?</span>
                 <Link to='/signup' className='dark-text bold-text signup-text'>
                   Sign Up For Free
                 </Link>
-              </>
+              </div>
             )}
             {page === 'signup' && (
-              <>
+              <div className='account-text-wrap'>
                 <span className='grey-text default-cursor'>Already have an account?</span>
                 <Link to='/login' className='dark-text bold-text signup-text'>
                   Log In
                 </Link>
-              </>
+              </div>
             )}
           </div>
         </div>

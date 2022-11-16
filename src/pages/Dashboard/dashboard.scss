@@ -142,6 +142,10 @@
             color: #ffffff;
             cursor: pointer;
 
+            &.host {
+              display: none;
+            }
+
             &:hover {
               background-color: #6b67aa;
               border: 2px solid #16dcf4;
@@ -293,19 +297,39 @@
 
         .left {
           flex: 1;
+          flex-direction: row;
+          align-items: center;
 
           .profile-wrap {
+            flex: 1.5;
             grid-auto-flow: column;
+            gap: 2rem;
+
+            .avatar-wrap {
+              justify-self: right;
+            }
 
             .info-wrap {
-              // text-align: left;
+              justify-self: left;
               justify-items: left;
             }
           }
 
           .action-wrap {
-            display: none;
-            // margin-bottom: 20px;
+            flex: 1;
+            margin: 0;
+
+            button {
+              &.host-an-event {
+                display: none;
+              }
+
+              &.host {
+                display: inline-block;
+                width: 70%;
+                min-width: 150px;
+              }
+            }
           }
 
           .menu-wrap {
@@ -354,6 +378,23 @@
       .container {
         margin: 0 12.5px;
 
+        .left {
+          .profile-wrap {
+            gap: 1rem;
+          }
+
+          .action-wrap {
+            button {
+              &.host {
+                display: inline-block;
+                height: 3rem;
+                min-width: 100px;
+                font-size: 1.1rem;
+              }
+            }
+          }
+        }
+
         .right {
           .event-list-section {
             padding: 1.25rem;
@@ -380,6 +421,8 @@
       .container {
         .left {
           .profile-wrap {
+            gap: 0.8rem;
+
             .info-wrap {
               gap: 0.5rem;
               h2 {
@@ -397,6 +440,17 @@
               img {
                 width: 60px;
                 height: 60px;
+              }
+            }
+          }
+
+          .action-wrap {
+            button {
+              &.host {
+                display: inline-block;
+                height: 2.5rem;
+                min-width: 80px;
+                font-size: 1rem;
               }
             }
           }
@@ -418,6 +472,18 @@
   @media screen and (max-width: 320px) {
     main {
       .container {
+        margin: 0;
+
+        .left {
+          .action-wrap {
+            button {
+              &.host {
+                display: none;
+              }
+            }
+          }
+        }
+
         .right {
           .event-list-section {
             .filters {

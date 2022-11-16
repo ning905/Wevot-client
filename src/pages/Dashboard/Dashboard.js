@@ -113,7 +113,8 @@ export default function Dashboard() {
 
             <div className='action-wrap'>
               <Link to='/events/create'>
-                <button>HOST AN EVENT</button>
+                <button className='host-an-event'>HOST AN EVENT</button>
+                <button className='host'>HOST</button>
               </Link>
             </div>
 
