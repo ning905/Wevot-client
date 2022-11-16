@@ -66,11 +66,13 @@ export default function Navbar({ page }) {
                     </button>
 
                     <ClickAwayListener onClickAway={() => setOpenMenu(false)}>
-                      <div
-                        className={openMenu ? 'menu-wrap menu-open' : 'menu-wrap'}
-                        onClick={toggleOpenMenu}
-                      >
-                        <img src={currentUser.profileImgUrl} alt='avatar' className='avatar' />
+                      <div className='click-away-wrap'>
+                        <div
+                          className={openMenu ? 'menu-wrap menu-open' : 'menu-wrap'}
+                          onClick={toggleOpenMenu}
+                        >
+                          <img src={currentUser.profileImgUrl} alt='avatar' className='avatar' />
+                        </div>
                         <NavbarMenu
                           openMenu={openMenu}
                           setOpenMenu={setOpenMenu}
@@ -92,12 +94,15 @@ export default function Navbar({ page }) {
                     </Link>
 
                     <ClickAwayListener onClickAway={() => setOpenMenu(false)}>
-                      <div className={openMenu ? 'menu-wrap menu-open' : 'menu-wrap'}>
-                        <MenuIcon
-                          onClick={toggleOpenMenu}
-                          fontSize='large'
-                          style={{ color: '#16dcf4' }}
-                        />
+                      <div className='click-away-wrap'>
+                        <div className={openMenu ? 'menu-wrap menu-open' : 'menu-wrap'}>
+                          <MenuIcon
+                            onClick={toggleOpenMenu}
+                            fontSize='large'
+                            style={{ color: '#16dcf4' }}
+                          />
+                        </div>
+
                         <NavbarMenu
                           openMenu={openMenu}
                           setOpenMenu={setOpenMenu}

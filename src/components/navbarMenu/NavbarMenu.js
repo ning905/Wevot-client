@@ -13,7 +13,6 @@ export default function NavbarMenu({
   const { currentUser } = useContext(UserContext)
 
   function closeMenu() {
-    console.log('close')
     setOpenMenu(false)
   }
 
