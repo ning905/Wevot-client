@@ -1,4 +1,5 @@
 import { Avatar, AvatarGroup, Popover } from '@mui/material'
+import { useEffect } from 'react'
 import { useState } from 'react'
 import { initVoteAlert } from '../../pages/Event/Event'
 import { slotEndFormatTime, slotStartFormatTime } from '../../utils/formatTime'
@@ -17,6 +18,7 @@ export default function SlotItem({
   const [anchorEl, setAnchorEl] = useState(null)
   const [targetPar, setTargetPar] = useState(null)
   const [openParList, setOpenParList] = useState(false)
+  const [avatarMaxNum, setAvatarMaxNum] = useState(0)
   const openPop = Boolean(anchorEl)
 
   let className = 'slot-item'
@@ -66,6 +68,20 @@ export default function SlotItem({
     setOpenParList(true)
   }
 
+  function getAvatarMax() {
+    if (window.innerWidth >= 768) {
+      setAvatarMaxNum(3)
+    } else if (window.innerWidth >= 480) {
+      setAvatarMaxNum(2)
+    } else {
+      setAvatarMaxNum(1)
+    }
+  }
+
+  useEffect(() => {
+    getAvatarMax()
+  }, [])
+
   return (
     <div className={className} onClick={!isParticipant && !expired ? handleSelect : undefined}>
       <div className='time-wrap'>
@@ -75,7 +91,11 @@ export default function SlotItem({
       <div className='location-wrap'>{slot.location}</div>
 
       <div className='votes-wrap'>
-        <AvatarGroup max={4} sx={{ width: 'fit-content' }} onClick={handleClickOpenParList}>
+        <AvatarGroup
+          max={avatarMaxNum}
+          sx={{ width: 'fit-content' }}
+          onClick={handleClickOpenParList}
+        >
           {slot.participants.map((par, index) => (
             <div key={index}>
               <Avatar

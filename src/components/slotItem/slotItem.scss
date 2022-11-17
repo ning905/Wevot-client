@@ -35,6 +35,17 @@
   .votes-wrap {
     display: flex;
     justify-content: flex-end;
+
+    .avatar {
+      width: 35px;
+      height: 35px;
+    }
+
+    .css-sxh3gq-MuiAvatar-root-MuiAvatarGroup-avatar {
+      width: 35px;
+      height: 35px;
+      font-size: 1rem;
+    }
   }
 
   @media screen and (max-width: 768px) {
@@ -44,19 +55,25 @@
     .location-wrap {
       font-size: 1rem;
     }
-
-    .votes-wrap {
-      .avatar {
-        width: 30px;
-        height: 30px;
-      }
-    }
   }
 
   @media screen and (max-width: 480px) {
     .time-wrap,
     .location-wrap {
       font-size: 0.9rem;
+    }
+
+    .votes-wrap {
+      .avatar {
+        width: 30px;
+        height: 30px;
+      }
+
+      .css-sxh3gq-MuiAvatar-root-MuiAvatarGroup-avatar {
+        width: 30px;
+        height: 30px;
+        font-size: 0.9rem;
+      }
     }
   }
 
