@@ -49,9 +49,9 @@ export default function Verify() {
       <main className='submitted'>
         <div className='container'>
           <div className='titles'>
-            <h2>{page.title}</h2>
+            <h2 className='verify-title'>{page.title}</h2>
 
-            {page.status === 'fail' && <p>{page.message}</p>}
+            {page.status === 'fail' && <p className='verify-message'>{page.message}</p>}
 
             {page.status === 'success' && (
               <Link to='/dashboard' replace={true}>

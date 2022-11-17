@@ -63,12 +63,34 @@
         padding: 3rem 4rem 1rem 4rem;
       }
     }
+
+    .btn-wrap {
+      button {
+        &.join-another-btn {
+          font-size: 0.9rem;
+        }
+      }
+    }
   }
 
   @media screen and (max-width: 480px) {
     .text-wrap {
       h2 {
         padding: 3rem 3rem 0 3rem;
+      }
+    }
+
+    .btn-wrap {
+      flex-direction: column;
+      // gap: 1rem;
+
+      button {
+        margin-bottom: 1rem;
+        min-width: 8.3rem;
+
+        &.join-another-btn {
+          margin-left: 0;
+        }
       }
     }
   }
